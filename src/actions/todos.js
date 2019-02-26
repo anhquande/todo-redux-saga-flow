@@ -2,20 +2,18 @@
 
 import type { ID, TodoContent, TodoStatus, TodosAction } from '../types/todos'
 
-let nextTodoId: ID = 0
-
-export const addTodo = (content: TodoContent): TodosAction => {
-  nextTodoId += 1
-  console.log("actions.addTodo: ",content)
+export const createTodo = (content: TodoContent): TodosAction => {
+  console.log("actions.createTodo: ", content)
   return {
     type: 'TODO_CREATE',
-    id: nextTodoId,
-    content
+    note: content.note,
+    title: content.title,
+    id: (new Date()).getTime(),
   }
 }
 
-export const updateTodoStatus = (id:ID, status: TodoStatus): TodosAction => {
-  console.log("actions.updateTodoStatus: id=",id)
+export const updateTodoStatus = (id: ID, status: TodoStatus): TodosAction => {
+  console.log("actions.updateTodoStatus: id=", id)
   return {
     type: 'TODO_UPDATE_STATUS',
     id,
@@ -23,8 +21,8 @@ export const updateTodoStatus = (id:ID, status: TodoStatus): TodosAction => {
   }
 }
 
-export const deleteTodo = (id:ID): TodosAction => {
-  console.log("actions.deleteTodo: id=",id)
+export const deleteTodo = (id: ID): TodosAction => {
+  console.log("actions.deleteTodo: id=", id)
   return {
     type: 'TODO_DELETE',
     id

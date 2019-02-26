@@ -54,8 +54,8 @@ export function UITodoItem( {item} ){
       </FormControl>
       <ListItemText primary={item.content.title} secondary={item.content.note}/>
       <ListItemSecondaryAction>
-        <IconButton aria-label="Comments">
-          <DeleteIcon onClick={(e) => handleDelete(e,item.id)}/>
+        <IconButton aria-label="Comments" onClick={(e) => handleDelete(e,item.id)}>
+          <DeleteIcon/>
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>

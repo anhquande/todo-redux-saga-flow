@@ -5,6 +5,7 @@ import List from '@material-ui/core/List'
 import { UITodoItem } from './UITodoItem'
 
 export function UITodoList({ items }) {
+  console.log('UITodoList. items:',items)
 
   function renderList() {
     return (
