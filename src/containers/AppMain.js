@@ -5,29 +5,13 @@ import { UITodoList } from '../components/UITodoList'
 import { TodoForm } from '../components/TodoForm'
 import { createTodo } from '../actions/todos'
 import { doFilter, visibleTodosSelector } from '../selectors'
-
-function useTodosReducer() {
-  return useMappedState(
-    useCallback(state => {
-      console.log("useMappedState: state = ",state)
-      return state.todos
-    }, []),
-  )
-}
-
-function useVisibilityFilter() {
-  return useMappedState(
-    useCallback(state => {
-      return state.visibilitiyFilter
-    }, []),
-  )
-}
+import { useTodos, useVisibilityFilter } from '../hooks/useReducer'
 
 export function AppMain(){
   console.log("[AppMain].render()")
 
   const store = useContext(StoreContext)
-  const todos = useTodosReducer()
+  const todos = useTodos()
   const visibilityFilter = useVisibilityFilter()
 
   const dispatch = useDispatch()

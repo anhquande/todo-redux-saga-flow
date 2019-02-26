@@ -39,28 +39,17 @@ const initList:TodoItem = [{
 }]
 
 const todos = (state: TodoList = initList, action: Action): TodoList => {
-  console.log('reducer.todos: action=', action)
   switch (action.type) {
     case 'TODO_CREATE':
-      const newState = [...state, createTodo(action.id, action.title, action.note)]
-      console.log('reducer.TODO_CREATE: oldState =', state)
-      console.log('reducer.TODO_CREATE: newState =', newState)
-      return newState
+      return [...state, createTodo(action.id, action.title, action.note)]
 
     case 'TODO_UPDATE_STATUS':
-      const newState2 = changeTodoStatus(state, action.id, action.status)
-      console.log('reducer.TODO_UPDATE_STATUS: oldState =', state)
-      console.log('reducer.TODO_UPDATE_STATUS: newState =', newState2)
-      return newState2
+      return changeTodoStatus(state, action.id, action.status)
 
     case 'TODO_DELETE':
-      const newState3 = removeTodoById(state, action.id)
-      console.log('reducer.TODO_DELETE: oldState =', state)
-      console.log('reducer.TODO_DELETE: newState =', newState3)
-      return newState3
+      return removeTodoById(state, action.id)
 
     default:
-      console.log('reducer.DEFAULT: newState is not changed =', state)
       return state
   }
 }

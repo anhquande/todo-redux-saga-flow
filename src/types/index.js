@@ -2,10 +2,8 @@
 import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux'
 
 import type { TodosState, TodosAction } from './todos'
-import type {
-  VisibilityFilterState,
-  VisibilityFilterAction
-} from './visibilityFilter'
+import type { VisibilityFilterState, VisibilityFilterAction } from './visibilityFilter'
+import type { LayoutState, LayoutAction } from './layout'
 
 export type ReduxInitAction = { type: '@@INIT' };
 

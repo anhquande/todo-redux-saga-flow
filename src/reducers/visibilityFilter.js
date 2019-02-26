@@ -8,7 +8,6 @@ const visibilityFilter = (
   action: Action
 ): VisibilityFilter => {
 
-  console.log("reducer.visibilityFilter: action=",action)
   switch (action.type) {
     case 'SET_VISIBILITY_FILTER':
       return action.filter
