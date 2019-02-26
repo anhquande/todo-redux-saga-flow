@@ -5,6 +5,8 @@
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
+    "@material/form-field": "^0.44.1",
+    "formik": "^1.5.1",
     "node-sass": "^4.11.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
@@ -13,7 +15,8 @@
     "redux": "^4.0.1",
     "redux-react-hook": "^3.2.0",
     "redux-saga": "^1.0.1",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "yup": "^0.26.10"
   },
   "scripts": {
     "start": "react-scripts start",
