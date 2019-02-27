@@ -8,12 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import MenuIcon from '@material-ui/icons/Menu'
 import { StoreContext, useDispatch } from 'redux-react-hook'
 import Drawer from '@material-ui/core/Drawer'
-import List from '@material-ui/core/List'
 import Divider from '@material-ui/core/Divider'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
 import MailIcon from '@material-ui/icons/Mail'
 import classNames from 'classnames'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -32,7 +27,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import { useClasses } from '../hooks/useClasses'
 import { useLayout } from '../hooks/useReducer'
 import routes from '../routes'
-
+import { SidebarMenu } from './SidebarMenu'
 
 // Change the css injection order so that our style can override the built-in css
 // How to do it?
@@ -106,7 +101,7 @@ const styles = theme => {
       overflowX: 'hidden',
       width: 0,
       [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(9) + 1,
+        width: theme.spacing(7),
       },
     },
     toolbar: {
@@ -433,24 +428,9 @@ export function App() {
         <IconButton onClick={()=>handleToggleDrawer()}>
           <ChevronLeftIcon/>
         </IconButton>
-      </div>      <Divider/>
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
-            <ListItemText primary={text}/>
-          </ListItem>
-        ))}
-      </List>
+      </div>
       <Divider/>
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
-            <ListItemText primary={text}/>
-          </ListItem>
-        ))}
-      </List>
+      <SidebarMenu/>
     </Drawer>
   ) // renderDrawer
 
