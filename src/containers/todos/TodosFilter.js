@@ -9,11 +9,9 @@ import ApprovedIcon from '@material-ui/icons/DoneAll'
 import NewIcon from '@material-ui/icons/NewReleases'
 import ShowAllIcon from '@material-ui/icons/AllInbox'
 import { StoreContext, useDispatch } from 'redux-react-hook'
-import { setVisibilityFilter } from '../actions/visibilityFilter'
+import { setVisibilityFilter } from '../../actions/visibilityFilter'
 
-export function AppFooter() {
-  console.log("[AppFooter].render()")
-
+export function TodosFilter() {
   const store = useContext(StoreContext)
 
   const [value, setValue] = useState(store.getState().visibilitiyFilter)
@@ -22,12 +20,11 @@ export function AppFooter() {
 
   function handleChange(event, v) {
     setValue(v)
-    console.log("AppFooter: ", event, v)
     dispatch(setVisibilityFilter(v))
   }
 
   return (
-    <footer>
+    <div>
       <BottomNavigation
         value={value}
         onChange={handleChange}
@@ -42,6 +39,6 @@ export function AppFooter() {
         <BottomNavigationAction label="Done" icon={<DoneIcon/>} value="SHOW_DONE"/>
         <BottomNavigationAction label="Approved" icon={<ApprovedIcon/>} value="SHOW_APPROVED"/>
       </BottomNavigation>
-    </footer>
+    </div>
   )
 }

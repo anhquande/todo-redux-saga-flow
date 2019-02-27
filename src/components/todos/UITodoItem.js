@@ -11,7 +11,7 @@ import Input from '@material-ui/core/Input'
 import MenuItem from '@material-ui/core/MenuItem'
 import { FormControl } from '@material-ui/core'
 import {StoreContext} from 'redux-react-hook'
-import { deleteTodo, updateTodoStatus } from '../actions/todos'
+import { deleteTodo, updateTodoStatus } from '../../actions/todos'
 
 export function UITodoItem( {item} ){
 
