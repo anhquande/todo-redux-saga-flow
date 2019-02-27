@@ -11,7 +11,7 @@ import ShowAllIcon from '@material-ui/icons/AllInbox'
 import { StoreContext, useDispatch } from 'redux-react-hook'
 import { setVisibilityFilter } from '../actions/visibilityFilter'
 
-export function AppFooter(){
+export function AppFooter() {
   console.log("[AppFooter].render()")
 
   const store = useContext(StoreContext)
@@ -20,23 +20,28 @@ export function AppFooter(){
 
   const dispatch = useDispatch()
 
-  function handleChange(event, v){
+  function handleChange(event, v) {
     setValue(v)
-    console.log("AppFooter: ",event,v)
+    console.log("AppFooter: ", event, v)
     dispatch(setVisibilityFilter(v))
   }
+
   return (
-    <BottomNavigation
-      value={value}
-      onChange={handleChange}
-      showLabels
-    >
-      <BottomNavigationAction label="All" icon={<ShowAllIcon/>} value="SHOW_ALL"/>
-      <BottomNavigationAction label="New" icon={<NewIcon/>} value="SHOW_NEW"/>
-      <BottomNavigationAction label="Todo" icon={<TodoIcon/>} value="SHOW_TODO"/>
-      <BottomNavigationAction label="In progress" icon={<InProgressIcon/>} value="SHOW_IN_PROGRESS"/>
-      <BottomNavigationAction label="Done" icon={<DoneIcon/>} value="SHOW_DONE"/>
-      <BottomNavigationAction label="Approved" icon={<ApprovedIcon/>} value="SHOW_APPROVED"/>
-    </BottomNavigation>
+    <footer>
+      <BottomNavigation
+        value={value}
+        onChange={handleChange}
+        showLabels
+      >
+        <BottomNavigationAction label="All" icon={<ShowAllIcon/>} value="SHOW_ALL"/>
+        <BottomNavigationAction label="New" icon={<NewIcon/>} value="SHOW_NEW"/>
+        <BottomNavigationAction label="Todo" icon={<TodoIcon/>} value="SHOW_TODO"/>
+        <BottomNavigationAction label="In progress"
+                                icon={<InProgressIcon/>}
+                                value="SHOW_IN_PROGRESS"/>
+        <BottomNavigationAction label="Done" icon={<DoneIcon/>} value="SHOW_DONE"/>
+        <BottomNavigationAction label="Approved" icon={<ApprovedIcon/>} value="SHOW_APPROVED"/>
+      </BottomNavigation>
+    </footer>
   )
 }
