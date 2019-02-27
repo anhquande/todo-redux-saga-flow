@@ -4,16 +4,11 @@ import React, { useContext, useState } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
 import MenuIcon from '@material-ui/icons/Menu'
 import { StoreContext, useDispatch } from 'redux-react-hook'
-import Drawer from '@material-ui/core/Drawer'
-import Divider from '@material-ui/core/Divider'
 import MailIcon from '@material-ui/icons/Mail'
 import classNames from 'classnames'
 import MenuItem from '@material-ui/core/MenuItem'
-import SearchIcon from '@material-ui/icons/Search'
-import InputBase from '@material-ui/core/InputBase'
 import Badge from '@material-ui/core/Badge'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import MoreIcon from '@material-ui/icons/MoreVert'
@@ -22,13 +17,13 @@ import Menu from '@material-ui/core/Menu'
 import JssProvider from 'react-jss/lib/JssProvider'
 import { create } from 'jss'
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import { useClasses } from '../../hooks/useClasses'
 import { useLayout } from '../../hooks/useReducer'
-import routes from '../../routes'
-import { SidebarMenu } from '../SidebarMenu'
 import { styles } from './styles'
 import { GlobalSearchBar } from './GlobalSearchBar'
+import { AppDrawer } from './AppDrawer'
+import { AppMain } from './AppMain'
+import { PageHeader } from './PageHeader';
 
 // Change the css injection order so that our style can override the built-in css
 // How to do it?
@@ -160,12 +155,6 @@ export function App() {
     </div>
   ) // renderMobileSection
 
-  const renderHeaderTitle = (
-    <Typography variant="h6" color="inherit" noWrap className={classes.title}>
-      Mini variant drawer OPEN: {open ? 'OPEN' : 'CLOSE'}
-    </Typography>
-  ) // renderHeaderTitle
-
   const renderToggleMenuIcon = (
     <IconButton
       color="inherit"
@@ -179,38 +168,6 @@ export function App() {
     </IconButton>
   ) // renderToggleMenuIcon
 
-  const renderDrawer = (
-    <Drawer
-      variant="permanent"
-      className={classNames(classes.drawer, {
-        [classes.drawerOpen]: open,
-        [classes.drawerClose]: !open,
-      })}
-      classes={{
-        paper: classNames({
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        }),
-      }}
-      open={open}
-    >
-      <div className={classes.toolbar}>
-        <IconButton onClick={()=>handleToggleDrawer()}>
-          <ChevronLeftIcon/>
-        </IconButton>
-      </div>
-      <Divider/>
-      <SidebarMenu/>
-    </Drawer>
-  ) // renderDrawer
-
-  const renderMainPageContent = (
-    <main className={classes.content}>
-      <div className={classes.toolbar}/>
-      { routes }
-    </main>
-  ) // renderMainPageContent
-
   return (
     <JssProvider jss={jss} generateClassName={generateClassName}>
 
@@ -223,7 +180,7 @@ export function App() {
         >
           <Toolbar disableGutters={!open} className={classes.toolbar}>
             {renderToggleMenuIcon}
-            {renderHeaderTitle}
+            <PageHeader classes={classes}/>
             <div className={classes.grow}/>
             <GlobalSearchBar classes={classes}/>
             {renderDesktopSection}
@@ -233,9 +190,9 @@ export function App() {
         {renderDesktopMenu}
         {renderMobileMenu}
 
-        {renderDrawer}
+        <AppDrawer classes={classes} open={open} handleToggleDrawer={handleToggleDrawer}/>
 
-        {renderMainPageContent}
+        <AppMain classes={classes}/>
       </div>
     </JssProvider>
   ) // return

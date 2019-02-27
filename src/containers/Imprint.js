@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Typography from '@material-ui/core/Typography'
+import { useDispatch } from 'redux-react-hook';
+import { setPageHeader } from '../actions/page';
 
 export function Imprint() {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(setPageHeader("Imprint"))
+  })
+
   return (
     <>
       Imprint: [TODO] To be implemented

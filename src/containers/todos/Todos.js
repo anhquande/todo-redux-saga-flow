@@ -1,18 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { StoreContext, useDispatch } from 'redux-react-hook'
-import Card from '@material-ui/core/Card'
-import Divider from '@material-ui/core/Divider'
-import CardActionArea from '@material-ui/core/CardActionArea'
-import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
-import CardActions from '@material-ui/core/CardActions'
-import Button from '@material-ui/core/Button'
 import { UITodoList } from '../../components/todos/UITodoList'
 import { TodoForm } from '../../components/todos/TodoForm'
 import { createTodo } from '../../actions/todos'
 import { doFilter } from '../../selectors'
 import { useTodos, useVisibilityFilter } from '../../hooks/useReducer'
 import { TodosFilter } from './TodosFilter'
+import { setPageHeader } from '../../actions/page'
 
 export function Todos() {
   console.log("[AppMain].render()")
@@ -26,6 +21,12 @@ export function Todos() {
   console.log("AppMain.store= ",store)
   console.log("AppMain.store.state= ",store.getState())
   const [visibleTodos, setVisibleTodos] = useState([])
+
+  useEffect(()=>{
+    const countNewTodos = todos.filter(t => t.status === 'new').length
+    const countTotal = todos.length
+    dispatch(setPageHeader("Todos", `Todos (${countNewTodos}/${countTotal})`))
+  })
 
   useEffect(()=>{
     console.log("useEffect")

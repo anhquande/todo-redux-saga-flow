@@ -24,3 +24,19 @@ export function useLayout() {
     }, []),
   )
 }
+
+export function useLocaleState() {
+  return useMappedState(
+    useCallback(state => {
+      return state.localeState
+    }, []),
+  )
+}
+
+export function usePageState() {
+  return useMappedState(
+    useCallback(state => {
+      return state.pageState
+    }, []),
+  )
+}
