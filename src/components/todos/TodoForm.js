@@ -8,6 +8,7 @@ import Card from '@material-ui/core/Card'
 import { CardContent } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import CardActions from '@material-ui/core/CardActions'
+import { useTranslation } from 'react-i18next'
 
 function useDirtyForm(onUnload, dirty){
 
@@ -21,6 +22,7 @@ function useDirtyForm(onUnload, dirty){
     }
   },[dirty])
 }
+
 export const TodoNativeForm = props => {
   const {
     handleSubmit,
@@ -32,6 +34,8 @@ export const TodoNativeForm = props => {
     dirty,
     setFieldTouched,
   } = props
+
+  const { t, i18n } = useTranslation()
 
   const change = (fieldName, e) => {
     e.persist()
@@ -61,11 +65,11 @@ export const TodoNativeForm = props => {
       handleSubmit(params)
     }}
     >
-      <Card>
-        <CardContent>
+      <div>
+        <div>
           <div>
             <Typography color="textSecondary" gutterBottom>
-              What are you doing today?
+              {t('what.are.you.doing.today')}
               {dirty && (
                 <>Dirty</>
               )}
@@ -93,9 +97,9 @@ export const TodoNativeForm = props => {
               onChange={handleChangeNote}
             />
           </div>
-        </CardContent>
+        </div>
 
-        <CardActions>
+        <div>
           <Button
             type="submit"
             variant="contained"
@@ -104,8 +108,8 @@ export const TodoNativeForm = props => {
           >
             Submit
           </Button>
-        </CardActions>
-      </Card>
+        </div>
+      </div>
     </form>
   )
 }

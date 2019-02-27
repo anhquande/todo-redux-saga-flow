@@ -43,23 +43,20 @@ export function Todos() {
   }
 
   return (
-    <Card>
-      <CardActionArea>
-
-        <CardContent>
+    <>
+        <div>
           <Typography gutterBottom variant="h5" component="h2">
             Todos
           </Typography>
-          <TodoForm handleSubmit={handleSubmit}/>
+           <TodoForm handleSubmit={handleSubmit}/>
 
-          <UITodoList items={visibleTodos}/>
-        </CardContent>
-      </CardActionArea>
+            <UITodoList items={visibleTodos}/>
+        </div>
 
-      <CardActions>
-        <TodosFilter/>
-      </CardActions>
+      <div>
+         <TodosFilter/>
+      </div>
 
-    </Card>
+    </>
   )
 }

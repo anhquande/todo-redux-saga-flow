@@ -1,7 +1,6 @@
 // @flow
 import React, { useContext } from 'react'
 import ListItem from '@material-ui/core/ListItem'
-import Checkbox from '@material-ui/core/Checkbox'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import IconButton from '@material-ui/core/IconButton'
@@ -10,7 +9,7 @@ import Select from '@material-ui/core/Select'
 import Input from '@material-ui/core/Input'
 import MenuItem from '@material-ui/core/MenuItem'
 import { FormControl } from '@material-ui/core'
-import {StoreContext} from 'redux-react-hook'
+import { StoreContext } from 'redux-react-hook'
 import { deleteTodo, updateTodoStatus } from '../../actions/todos'
 
 export function UITodoItem( {item} ){

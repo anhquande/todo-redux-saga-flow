@@ -10,6 +10,7 @@ import { App } from './containers/App'
 import configureStore, { history } from './store'
 import * as serviceWorker from './serviceWorker'
 import createAppTheme from './themes/createAppTheme'
+import './i18n'
 
 const themeOptions = {
   palette: {
