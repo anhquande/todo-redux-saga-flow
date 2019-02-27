@@ -6,11 +6,11 @@ import blue from '@material-ui/core/colors/blue'
 import { ThemeProvider } from '@material-ui/styles'
 import { ConnectedRouter } from 'connected-react-router'
 import { Provider } from 'react-redux'
-import { App } from './containers/App'
 import configureStore, { history } from './store'
 import * as serviceWorker from './serviceWorker'
 import createAppTheme from './themes/createAppTheme'
 import './i18n'
+import { App } from './containers/App/index'
 
 const themeOptions = {
   palette: {
