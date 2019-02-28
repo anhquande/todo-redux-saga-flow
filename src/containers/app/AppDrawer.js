@@ -12,6 +12,7 @@ function SidebarMenu() {
 
   const model: SidebarMenuModel = [
     { title: 'Todos', icon: 'todos', to: '/todos' },
+    { title: 'Tags', icon: 'tags', to: '/tags' },
     { title: 'Imprint', icon: 'imprint', to: '/imprint' },
     { title: 'Help', icon: 'help', to: '/help' },
   ]

@@ -6,6 +6,7 @@ import visibilitiyFilter from './visibilityFilter'
 import layout from './layout'
 import localeState from './locale'
 import pageState from './page'
+import tagsState from './tags'
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -14,5 +15,6 @@ export default (history) => combineReducers({
   layout,
   localeState,
   pageState,
+  tagsState,
 })
 

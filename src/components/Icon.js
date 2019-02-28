@@ -7,6 +7,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import HelpIcon from '@material-ui/icons/Help'
 import ImprintIcon from '@material-ui/icons/ImportContacts'
 import TodosIcon from '@material-ui/icons/ListAltOutlined'
+import TagsIcon from '@material-ui/icons/Label'
 
 export function Icon({name, ...options}) {
   if (name === 'todos') return (<TodosIcon {...options}/>)
@@ -16,6 +17,7 @@ export function Icon({name, ...options}) {
   if (name === 'more') return (<MoreIcon {...options}/>)
   if (name === 'notifications') return (<NotificationsIcon {...options}/>)
   if (name === 'accountCircle') return (<AccountCircleIcon {...options}/>)
+  if (name === 'tags') return (<TagsIcon {...options}/>)
 
   return (<MoreIcon {...options}/>)
 

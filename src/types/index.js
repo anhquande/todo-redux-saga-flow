@@ -6,6 +6,7 @@ import type { VisibilityFilterState, VisibilityFilterAction } from './visibility
 import type { LayoutState, LayoutAction } from './layout'
 import type { LocaleAction, LocaleState } from './locale'
 import type { PageAction, PageState } from './page'
+import type { TagsAction, TagsState } from './tags'
 
 export type ReduxInitAction = { type: '@@INIT' };
 
@@ -14,6 +15,7 @@ export type State =
   VisibilityFilterState &
   LayoutState &
   LocaleState &
+  TagsState &
   PageState;
 
 export type Action =
@@ -22,6 +24,7 @@ export type Action =
   VisibilityFilterAction |
   LayoutAction |
   LocaleAction |
+  TagsAction |
   PageAction;
 
 export type Store = ReduxStore<State, Action>;

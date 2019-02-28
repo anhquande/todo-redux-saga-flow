@@ -17,6 +17,14 @@ export function useTodos() {
   )
 }
 
+export function useTags() {
+  return useMappedState(
+    useCallback(state => {
+      return state.tagsState
+    }, []),
+  )
+}
+
 export function useLayout() {
   return useMappedState(
     useCallback(state => {

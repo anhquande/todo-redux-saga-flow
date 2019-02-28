@@ -5,6 +5,7 @@ import { HelpMe } from '../containers/HelpMe'
 import { Imprint } from '../containers/Imprint'
 import { NoMatch } from '../containers/NoMatch'
 import { Todos } from '../containers/todos/Todos'
+import { Tags } from '../containers/tags/Tags'
 
 const routes = (
   <div>
@@ -13,6 +14,7 @@ const routes = (
       <Route path="/help" component={HelpMe}/>
       <Route path="/imprint" component={Imprint}/>
       <Route path="/todos" component={Todos}/>
+      <Route path="/tags" component={Tags}/>
       <Route component={NoMatch}/>
     </Switch>
   </div>
