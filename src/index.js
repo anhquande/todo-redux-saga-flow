@@ -11,6 +11,7 @@ import * as serviceWorker from './serviceWorker'
 import createAppTheme from './themes/createAppTheme'
 import './i18n'
 import { App } from './containers/app/index'
+import rootSaga from './sagas'
 
 const themeOptions = {
   palette: {
@@ -22,6 +23,7 @@ const themeOptions = {
 const theme = createAppTheme(themeOptions)
 
 const store = configureStore()
+store.runSaga(rootSaga)
 
 ReactDOM.render(
   <StoreContext.Provider value={store}>

@@ -257,3 +257,8 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+/fake-json-server/node_modules/
+/snapshots/**
+yarn.lock
+yarn-error.log
+/fake-json-server/snapshots/

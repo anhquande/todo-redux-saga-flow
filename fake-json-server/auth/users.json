@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "joe",
+      "email": "joe@email.com",
+      "password": "joe"
+    },
+    {
+      "id": 2,
+      "name": "leo",
+      "email": "leo@email.com",
+      "password": "leo"
+    },
+    {
+      "id": 3,
+      "name": "peppa",
+      "email": "peppa@email.com",
+      "password": "peppa"
+    },
+    {
+      "id": 4,
+      "name": "george",
+      "email": "george@email.com",
+      "password": "george"
+    },
+    {
+      "id": 5,
+      "name": "polly",
+      "email": "polly@email.com",
+      "password": "polly"
+    }
+  ]
+}
