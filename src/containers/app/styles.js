@@ -39,6 +39,7 @@ export const styles = theme => {
     },
     drawerPaper: {
       width: theme.app.drawer.maxWidth,
+      backgroundColor: theme.app.sidebar.menuItem.backgroundColor,
     },
     drawerOpen: {
       width: theme.app.drawer.maxWidth,
@@ -91,10 +92,16 @@ export const styles = theme => {
         backgroundColor: fade(theme.palette.common.white, 0.25),
       },
       marginLeft: 0,
-      width: '100%',
+      width: 'auto',
+      '&:focus': {
+        width: '100%',
+      },
       [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(),
         width: 'auto',
+        '&:focus': {
+          width: '100%',
+        },
       },
     },
     searchIcon: {
@@ -117,9 +124,9 @@ export const styles = theme => {
       paddingLeft: theme.spacing(9),
       width: '100%',
       [theme.breakpoints.up('sm')]: {
-        width: 220,
+        width: '100%',
         '&:focus': {
-          width: 400,
+          width: '100%',
         },
       },
       transition: theme.transitions.create(['width'], {

@@ -9,6 +9,8 @@ import { CardContent } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import CardActions from '@material-ui/core/CardActions'
 import { useTranslation } from 'react-i18next'
+import { Prompt } from 'react-router'
+import PreventTransitionPrompt from '../PreventTransitionPrompt'
 
 function useDirtyForm(onUnload, dirty){
 
@@ -65,6 +67,13 @@ export const TodoNativeForm = props => {
       handleSubmit(params)
     }}
     >
+       <Prompt
+         when={dirty}
+         message={location =>
+           `Changes you made may not be saved. Are you sure you want to go to ${location.pathname}`
+         }
+       />
+
       <div>
         <div>
           <div>

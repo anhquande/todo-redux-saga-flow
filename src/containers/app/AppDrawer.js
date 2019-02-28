@@ -6,7 +6,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List'
 import type { SidebarMenuModel } from '../../types/sidebarMenu'
-import { ListItemLink } from '../ListItemLink'
+import { ListItemLink } from '../../components/ListItemLink'
 
 function SidebarMenu() {
 
@@ -37,7 +37,7 @@ export function AppDrawer({open, classes, handleToggleDrawer}) {
         [classes.drawerClose]: !open,
       })}
       classes={{
-        paper: classNames({
+        paper: classNames(classes.drawerPaper,{
           [classes.drawerOpen]: open,
           [classes.drawerClose]: !open,
         }),

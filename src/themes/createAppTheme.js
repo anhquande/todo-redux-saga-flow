@@ -3,10 +3,10 @@ import { blueGrey, green, white } from '@material-ui/core/colors'
 
 export default function createAppTheme(options: ThemeOptions) {
   const menuBg = blueGrey[900]
-  const menuColor = blueGrey[100]
+  const menuColor = green[100]
 
   const menuBgHover = blueGrey[800]
-  const menuColorHover = blueGrey[50]
+  const menuColorHover = green[50]
 
   return createMuiTheme({
     app:{
