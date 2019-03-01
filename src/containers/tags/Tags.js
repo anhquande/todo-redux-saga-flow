@@ -26,7 +26,7 @@ export function Tags() {
     const countNewTags = visibleTags && visibleTags.length
     const countTotal = allTagIds && allTagIds.length
     setHeader(`Tags (${countNewTags}/${countTotal})`)
-    dispatch(setPageHeader("Tags", header))
+    dispatch(setPageHeader(header, header))
   }, [allTagIds,visibleTags])
 
   useEffect( ()=>{
