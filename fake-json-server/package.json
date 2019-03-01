@@ -6,7 +6,7 @@
   "scripts": {
     "no-auth": "json-server --watch ./data --port 8080 --delay 1000 --snapshots ./snapshots",
     "start": "node server.js",
-    "fake": "json-server fakedb.js --port 8080 --delay 1000 --snapshots ./snapshots"
+    "fake": "json-server fakedb.js --port 8080 --delay 200 --snapshots ./snapshots"
   },
   "dependencies": {
     "chance": "^1.0.18",

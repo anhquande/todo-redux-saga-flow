@@ -1,6 +1,6 @@
 // @flow
 import { visibleTagsSelector } from './selectTags'
-import type { TagsState } from '../types/tags'
+import type { TagsState } from './types'
 
 describe('visibleTagsSelector', () => {
   let state: TagsState

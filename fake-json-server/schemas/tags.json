@@ -11,17 +11,21 @@
     "tags": {
       "$id": "#/properties/tags",
       "type": "array",
-      "minItems": 3,
-      "maxItems": 20,
+      "minItems": 2000,
+      "maxItems": 5000,
       "title": "The tags Schema",
       "items": {
         "$id": "#/properties/tags/items",
         "type": "object",
         "title": "The Items Schema",
         "required": [
-          "name","description"
+          "_id","name","usages"
         ],
         "properties": {
+          "_id": {
+            "type": "string",
+            "faker":"random.uuid"
+          },
           "name": {
             "$id": "#/properties/tags/items/properties/name",
             "type": "string",
@@ -29,14 +33,14 @@
             "default": "",
             "minLength": 4,
             "maxLength": 50,
-            "faker":"custom.tags"
-          },
-          "description": {
-            "type": "string",
             "chance": {
-              "word":{
-                "syllables": 3
-              }
+              "word":{ "syllables": 3 }
+            }
+          },
+          "usages": {
+            "type": "integer",
+            "chance": {
+              "integer":{ "min": 0, "max": 20 }
             }
           }
         }

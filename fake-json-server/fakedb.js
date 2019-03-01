@@ -1,7 +1,10 @@
-
+const Chance = require('chance')
 const faker = require('faker')
 const fs = require('fs')
 const jsf = require('json-schema-faker')
+
+jsf.extend('faker', () => faker)
+jsf.extend('chance', () => new Chance())
 
 function generateFromSchema(schema) {
   const dataSchema = JSON.parse(fs.readFileSync(schema, 'UTF-8'))
@@ -24,6 +27,7 @@ const generateFakeDB = () => {
   const fakeDb = {
     "accounts" : generateAccounts(10),
     "tags": generateFromSchema('./schemas/tags.json'),
+    "todos": generateFromSchema('./schemas/todos.json'),
     "products": readData('./data/database.json')}
 
   return fakeDb
