@@ -1,9 +1,11 @@
 // REDUX SAGA
-import { put, all } from 'redux-saga/effects'
+import { all } from 'redux-saga/effects'
 import { debugSaga } from './debugSaga'
+import repositorySagas from '../repository/repositorySagas'
 
 export default function* rootSaga() {
-  const results = yield all([
+  yield all([
     debugSaga(),
+    ...repositorySagas,
   ])
 }

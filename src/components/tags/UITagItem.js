@@ -6,7 +6,10 @@ export function UITagItem( {item} ){
   console.log("UITagItem : ",item)
   return (
     <div>
-      {item.name}
+      {item && (
+        <>{item.name}</>
+      )}
+
     </div>
   )
 

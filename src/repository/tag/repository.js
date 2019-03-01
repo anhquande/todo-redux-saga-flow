@@ -1,8 +1,9 @@
 // @flow
-import type { Entity, createRepository } from '../repositories'
+import createRoutines from '../createRoutines'
+import type { Entity } from '../baseRepository'
 
 export const TAG: Entity = "TAG"
 
 export const TagRepository = {
-  TAG : createRepository(TAG)
+  TAG : createRoutines(TAG)
 }

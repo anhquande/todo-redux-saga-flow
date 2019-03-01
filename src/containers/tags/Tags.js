@@ -7,36 +7,49 @@ import { createTag } from '../../actions/tags'
 import { useTags } from '../../hooks/useReducer'
 import { TagsFilter } from './TagsFilter'
 import { setPageHeader } from '../../actions/page'
-import type { TagsState } from '../../types/tags'
-import { visibleTagsSelector } from '../../selectors/selectTags'
+import type { TagsState } from '../../repository/tag/types'
+import { getTagIds, getVisibleTags } from '../../repository/tag/selectors'
+import { TagRepository } from '../../repository/tag/repository'
 
 export function Tags() {
   const tagsState: TagsState = useTags()
 
   const dispatch = useDispatch()
 
-  const visibleTags = visibleTagsSelector(tagsState)
+  const allTagIds = getTagIds(tagsState)
+  const visibleTags = getVisibleTags(tagsState)
+  const [header, setHeader] = useState("")
+
+  const {loading} = tagsState
 
   useEffect(() => {
-    const { tags } = tagsState
-    const countNewTags = tags.filter(t => t.status === 'new').length
-    const countTotal = tags.length
-    dispatch(setPageHeader("Tags", `Tags (${countNewTags}/${countTotal})`))
-  })
+    const countNewTags = visibleTags && visibleTags.length
+    const countTotal = allTagIds && allTagIds.length
+    setHeader(`Tags (${countNewTags}/${countTotal})`)
+    dispatch(setPageHeader("Tags", header))
+  }, [allTagIds,visibleTags])
+
+  useEffect( ()=>{
+    dispatch(TagRepository.TAG.FIND_ALL.trigger())
+  }, [])
 
   function handleSubmit(name) {
-    dispatch(createTag(name))
+    // TODO: dispatch(createTag(name))
   }
 
   return (
     <>
       <div>
         <Typography gutterBottom variant="h5" component="h2">
-          Tags
+          {header}
         </Typography>
         <TagForm handleSubmit={handleSubmit}/>
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <UITagList items={visibleTags}/>
+        )}
 
-        <UITagList items={visibleTags}/>
       </div>
 
       <div>

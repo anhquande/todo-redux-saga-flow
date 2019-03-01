@@ -4,17 +4,18 @@ import List from '@material-ui/core/List'
 import { UITagItem } from './UITagItem'
 
 export function UITagList({ items }) {
-  console.log("UITagList: ",items)
+  console.log("UITagList: items= ",items)
+  if (!items || items.size === 0) return (<></>)
+
   function renderList() {
     return (
       <>
         <List>
-          {items.map(item => {
-
-            return (
-              <UITagItem item={item} key={item.id}/>
-            )
-          })}
+           {items.map( (item, index) => {
+             return (
+               <UITagItem item={item} key={item.id}/>
+             )
+           })}
         </List>
       </>
     )

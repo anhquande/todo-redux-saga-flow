@@ -8,12 +8,16 @@ import { useDispatch } from 'redux-react-hook'
 import { useTags } from '../../hooks/useReducer'
 import type { Dispatch } from '../../types'
 import { filterTag } from '../../actions/tags'
+import { getFilter } from '../../repository/tag/selectors'
 
 export function TagsFilter() {
 
   const tagsState = useTags()
   console.log("tagsState:",tagsState)
-  const [value, setValue] = useState(tagsState ? tagsState.filter: 'SHOW_ALL')
+  const tagsFilter = getFilter(tagsState)
+  console.log("tagsFilter: :",tagsFilter)
+
+  const [value, setValue] = useState(tagsFilter)
 
   const dispatch: Dispatch = useDispatch()
 

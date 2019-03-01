@@ -3,6 +3,7 @@ import { createBrowserHistory } from 'history'
 import { applyMiddleware, compose, createStore } from 'redux'
 import { routerMiddleware } from 'connected-react-router'
 import createSagaMiddleware, { END }  from 'redux-saga'
+import logger from 'redux-logger'
 import createRootReducer from '../reducers'
 import type { Store } from '../types'
 
@@ -20,6 +21,9 @@ export default function configureStore(preloadedState):Store{
         routerMiddleware(history), // for dispatching history actions
         // ... other middlewares ...
         sagaMiddleware,
+
+        // Note: logger must be the last middleware in chain, otherwise it will log thunk and promise, not actual actions (#20).
+        logger
       ),
     ),
   )

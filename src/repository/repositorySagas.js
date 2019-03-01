@@ -1,5 +1,6 @@
-import { TagRepository } from './tag/repository'
+import tagWatcher from './tag/sagas'
 
-export const Repositories = {
-  ...TagRepository
-}
+export default [
+  tagWatcher(),
+]
+
