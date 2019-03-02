@@ -2,7 +2,8 @@ export const en = {
   translation: {
     "what.are.you.doing.today": "What are you doing today?",
     "tags": "Tags",
-
+    "tag.name":"Tag",
+    "tag.usages":"Usages",
   },
   placeHolder: {
     "search": "Search...",

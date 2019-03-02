@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import MultiGrid from 'react-virtualized/dist/commonjs/MultiGrid';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableFooter from '@material-ui/core/TableFooter';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Draggable from 'react-draggable';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import MultiGrid from 'react-virtualized/dist/commonjs/MultiGrid'
+import classNames from 'classnames'
+import { withStyles } from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableFooter from '@material-ui/core/TableFooter'
+import TablePagination from '@material-ui/core/TablePagination'
+import TableSortLabel from '@material-ui/core/TableSortLabel'
+import Draggable from 'react-draggable'
 
-import { calcColumnWidth } from './utils';
+import { calcColumnWidth } from './utils'
 
-const FOOTER_BORDER_HEIGHT = 1;
+const FOOTER_BORDER_HEIGHT = 1
 
 export const styles = theme => ({
   table: {
@@ -90,7 +90,7 @@ export const styles = theme => ({
     color: theme.palette.text.secondary
   },
   cellInLastColumn: {
-    paddingRight: theme.spacing.unit * 3
+    paddingRight: theme.spacing(3)
   },
   cellInLastRow: {
     borderBottom: 'none'
@@ -115,7 +115,7 @@ export const styles = theme => ({
     justifyContent: 'center',
     alignItems: 'center'
   }
-});
+})
 
 class MuiTable extends Component {
   static propTypes = {
@@ -131,28 +131,28 @@ class MuiTable extends Component {
   };
 
   constructor(props) {
-    super(props);
-    var widths = {};
+    super(props)
+    const widths = {}
     if (props.resizable) {
-      var initialWidth = 1;
-      var columns = [];
+      let initialWidth = 1
+      const columns = []
       props.columns.forEach(c => {
         if (c.width) {
-          widths[c.name] = 0.1;
-          initialWidth = initialWidth - 0.1;
+          widths[c.name] = 0.1
+          initialWidth -= 0.1
         } else {
-          columns.push(c);
+          columns.push(c)
         }
-      });
+      })
       columns.forEach(c => {
-        widths[c.name] = initialWidth / columns.length;
-      });
+        widths[c.name] = initialWidth / columns.length
+      })
     }
     this.state = {
       hoveredColumn: null,
       hoveredRowData: null,
       widths
-    };
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -160,28 +160,28 @@ class MuiTable extends Component {
       nextProps.width !== this.props.width ||
       nextProps.columns !== this.props.columns
     ) {
-      this.multiGrid.recomputeGridSize();
+      this.multiGrid.recomputeGridSize()
     }
   }
 
   resizeRow = ({ dataKey, deltaX }) =>
     this.setState(
       prevState => {
-        const prevWidths = prevState.widths;
-        const percentDelta = deltaX / this.props.width;
-        const columns = this.props.columns;
-        const index = columns.findIndex(c => c.name === dataKey);
-        const nextDataKey = columns[index + 1].name;
+        const prevWidths = prevState.widths
+        const percentDelta = deltaX / this.props.width
+        const columns = this.props.columns
+        const index = columns.findIndex(c => c.name === dataKey)
+        const nextDataKey = columns[index + 1].name
         return {
           widths: {
             ...prevWidths,
             [dataKey]: prevWidths[dataKey] + percentDelta,
             [nextDataKey]: prevWidths[nextDataKey] - percentDelta
           }
-        };
+        }
       },
       () => {
-        this.multiGrid.recomputeGridSize();
+        this.multiGrid.recomputeGridSize()
       }
     );
 
@@ -199,32 +199,32 @@ class MuiTable extends Component {
       onCellClick,
       resizable,
       cellProps: defaultCellProps
-    } = this.props;
+    } = this.props
 
-    const { hoveredColumn, hoveredRowData } = this.state;
+    const { hoveredColumn, hoveredRowData } = this.state
 
-    const column = columns[columnIndex];
-    const isHeader = includeHeaders && rowIndex === 0;
-    const headerOffset = includeHeaders ? 1 : 0;
-    const rowData = (data && data[rowIndex - headerOffset]) || {};
+    const column = columns[columnIndex]
+    const isHeader = includeHeaders && rowIndex === 0
+    const headerOffset = includeHeaders ? 1 : 0
+    const rowData = (data && data[rowIndex - headerOffset]) || {}
 
-    const isSelected = isCellSelected && isCellSelected(column, rowData);
+    const isSelected = isCellSelected && isCellSelected(column, rowData)
 
     const isHovered =
       hoveredColumn &&
       hoveredRowData &&
       isCellHovered &&
-      isCellHovered(column, rowData, hoveredColumn, hoveredRowData);
+      isCellHovered(column, rowData, hoveredColumn, hoveredRowData)
 
     const resolveCellProps = cellProps =>
       typeof cellProps === 'function'
         ? cellProps(column, rowData, hoveredColumn, hoveredRowData)
-        : cellProps;
+        : cellProps
     // TODO: Deep merge (do not override all defaultCellProps styles if column.cellProps.styles defined?)
     const { style: cellStyle, ...cellProps } = {
       ...resolveCellProps(defaultCellProps),
       ...resolveCellProps(column.cellProps)
-    };
+    }
 
     const contents = (
       <div className={classes.cellContents}>
@@ -257,7 +257,7 @@ class MuiTable extends Component {
           )}
         </span>
       </div>
-    );
+    )
 
     const className = classNames(classes.cell, {
       [classes.cellHovered]: isHovered,
@@ -265,9 +265,9 @@ class MuiTable extends Component {
       [classes.cellHeader]: isHeader,
       [classes.cellInLastColumn]: columnIndex === columns.length - 1,
       [classes.cellInLastRow]: rowIndex === (data ? data.length : 0)
-    });
+    })
 
-    const hasCellClick = !isHeader && onCellClick;
+    const hasCellClick = !isHeader && onCellClick
 
     return (
       <TableCell
@@ -275,7 +275,7 @@ class MuiTable extends Component {
         className={className}
         key={key}
         onMouseEnter={() => {
-          this.setState({ hoveredColumn: column, hoveredRowData: rowData });
+          this.setState({ hoveredColumn: column, hoveredRowData: rowData })
         }}
         onMouseLeave={() =>
           this.setState({ hoveredColumn: null, hoveredRowData: null })
@@ -317,11 +317,11 @@ class MuiTable extends Component {
               axis="x"
               defaultClassName="DragHandle"
               defaultClassNameDragging="DragHandleActive"
-              onDrag={(event, { deltaX }) =>
-                this.resizeRow({
-                  dataKey,
-                  deltaX
-                })
+              onDrag={(event, { deltaX }) => true
+                // this.resizeRow({
+                //   dataKey,
+                //   deltaX
+                // })
               }
               position={{ x: 0 }}
               zIndex={999}
@@ -333,23 +333,23 @@ class MuiTable extends Component {
           contents
         )}
       </TableCell>
-    );
+    )
   };
 
   resizableColumnWidths(index, columns, tableWidth) {
-    const column = columns[index];
-    return this.state.widths[column.name] * this.props.width;
+    const column = columns[index]
+    return this.state.widths[column.name] * this.props.width
   }
 
   getColumnWidthFunction() {
-    const { columnWidth, resizable, columns, width } = this.props;
+    const { columnWidth, resizable, columns, width } = this.props
     if (typeof columnWidth === 'function') {
-      return ({ index }) => columnWidth({ index, columns, width });
-    } else if (resizable) {
-      return ({ index }) => this.resizableColumnWidths(index, columns, width);
-    } else {
-      return ({ index }) => calcColumnWidth(index, columns, width);
+      return ({ index }) => columnWidth({ index, columns, width })
+    } if (resizable) {
+      return ({ index }) => this.resizableColumnWidths(index, columns, width)
     }
+      return ({ index }) => calcColumnWidth(index, columns, width)
+
   }
 
   render() {
@@ -378,33 +378,33 @@ class MuiTable extends Component {
       theme,
       resizable,
       ...props
-    } = this.props;
+    } = this.props
 
-    let calculatedHeight = 0;
+    let calculatedHeight = 0
     if (height) {
-      calculatedHeight = height; // fixed height
+      calculatedHeight = height // fixed height
     } else if (pagination && pagination.rowsPerPage && !fitHeightToRows) {
       const rowCount =
         pagination.rowsPerPage +
-        (fixedRowCount ? fixedRowCount : includeHeaders ? 1 : 0);
-      calculatedHeight = rowCount * rowHeight;
+        (fixedRowCount || (includeHeaders ? 1 : 0))
+      calculatedHeight = rowCount * rowHeight
     } else if (Array.isArray(data)) {
       const rowCount =
-        data.length + (fixedRowCount ? fixedRowCount : includeHeaders ? 1 : 0);
-      calculatedHeight = rowCount * rowHeight;
+        data.length + (fixedRowCount || (includeHeaders ? 1 : 0))
+      calculatedHeight = rowCount * rowHeight
     }
 
     const paginationHeight =
-      theme.mixins.toolbar.minHeight + FOOTER_BORDER_HEIGHT;
+      theme.mixins.toolbar.minHeight + FOOTER_BORDER_HEIGHT
 
     const calculatedHeightWithFooter =
-      calculatedHeight + (pagination ? paginationHeight : 0);
+      calculatedHeight + (pagination ? paginationHeight : 0)
     const containerHeight =
       maxHeight != null
         ? Math.min(calculatedHeightWithFooter, maxHeight)
-        : calculatedHeightWithFooter;
+        : calculatedHeightWithFooter
     const multiGridHeight =
-      containerHeight - (pagination ? paginationHeight : 0);
+      containerHeight - (pagination ? paginationHeight : 0)
 
     return (
       <Table
@@ -429,19 +429,19 @@ class MuiTable extends Component {
           fixedRowCount={fixedRowCount}
           enableFixedRowScroll={fixedRowCount > 0}
           // TODO: Read tehse from `classes` without classes.table inherirtance?  How to pass props.classes down to override?
-          classNameTopLeftGrid={'topLeftGrid'}
-          classNameTopRightGrid={'topRightGrid'}
-          classNameBottomLeftGrid={'bottomLeftGrid'}
-          classNameBottomRightGrid={'bottomRightGrid'}
+          classNameTopLeftGrid="topLeftGrid"
+          classNameTopRightGrid="topRightGrid"
+          classNameBottomLeftGrid="bottomLeftGrid"
+          classNameBottomRightGrid="bottomRightGrid"
         />
 
         {pagination && (
           <TableFooter component="div" className={classes.footer}>
-            <TablePagination component="div" {...pagination} />
+            <TablePagination component="div" {...pagination}/>
           </TableFooter>
         )}
       </Table>
-    );
+    )
   }
 }
 
@@ -467,6 +467,6 @@ MuiTable.propTypes = {
   classes: PropTypes.object,
   cellProps: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   style: PropTypes.object
-};
+}
 
-export default withStyles(styles, { withTheme: true })(MuiTable);
+export const DataTable = withStyles(styles, { withTheme: true })(MuiTable)

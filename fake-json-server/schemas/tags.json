@@ -12,7 +12,7 @@
       "$id": "#/properties/tags",
       "type": "array",
       "minItems": 45,
-      "maxItems": 50,
+      "maxItems": 200,
       "title": "The tags Schema",
       "items": {
         "$id": "#/properties/tags/items",
