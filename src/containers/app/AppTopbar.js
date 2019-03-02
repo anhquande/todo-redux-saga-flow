@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import classNames from 'classnames'
 import Toolbar from '@material-ui/core/Toolbar'
 import AppBar from '@material-ui/core/AppBar'
-import { useDispatch } from 'redux-react-hook'
 import { PageHeader } from './PageHeader'
 import { GlobalSearchBar } from './GlobalSearchBar'
 import { TopbarMobileMenu } from './TopbarMobileMenu'
@@ -56,7 +55,7 @@ export function AppTopbar({
 
           <div className={classes.grow}/>
 
-          <GlobalSearchBar classes={classes}/>
+          <GlobalSearchBar/>
 
           <TopbarDesktopMenu
             classes={classes}
