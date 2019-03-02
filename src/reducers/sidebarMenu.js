@@ -3,7 +3,8 @@
 import type { SidebarMenuState, SidebarMenuAction } from '../types/sidebarMenu'
 
 const initState: SidebarMenuState = {
-  menu: [
+  sidebarMenuOpen: true,
+  sidebarMenu: [
     { title: 'Todos', icon: 'todos', to: '/todos' },
     { title: 'Tags', icon: 'tags', to: '/tags' },
     { title: 'Imprint', icon: 'imprint', to: '/imprint' },
@@ -16,7 +17,12 @@ const sidebarMenuReducer = (state: SidebarMenuState = initState, action: Sidebar
     case 'SET_SIDEBAR_MENU':
       return {
         ...state,
-        menu: action.payload,
+        sidebarMenu: action.payload,
+      }
+    case 'TOGGLE_SIDEBAR_MENU':
+      return {
+        ...state,
+        sidebarMenuOpen: !state.sidebarMenuOpen,
       }
     default:
       return state

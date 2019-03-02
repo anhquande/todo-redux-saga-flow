@@ -4,44 +4,34 @@ import IconButton from '@material-ui/core/IconButton'
 import classNames from 'classnames'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import Divider from '@material-ui/core/Divider'
-import List from '@material-ui/core/List'
-import { ListItemLink } from '../../components/ListItemLink'
+import { useDispatch } from 'redux-react-hook'
+import { SidebarMenu } from './SidebarMenu'
 import { useSidebarMenuState } from '../../hooks/useReducer'
+import { toggleSidebarMenu } from '../../actions/sidebarMenu'
 
-function SidebarMenu() {
+export function AppDrawer({ classes }) {
 
-  const { menu } = useSidebarMenuState()
+  const { sidebarMenuOpen } = useSidebarMenuState()
 
-  return (
-    <>
-      <List>
-        {menu.map((item, index) => (
-          <ListItemLink key={item.to} to={item.to} primary={item.title} secondary={item.subTitle} icon={item.icon}/>
-        ))}
+  const dispatch = useDispatch()
 
-      </List>
-    </>
-  )
-}
-
-export function AppDrawer({open, classes, handleToggleDrawer}) {
   return (
     <Drawer
       variant="permanent"
       className={classNames(classes.drawer, {
-        [classes.drawerOpen]: open,
-        [classes.drawerClose]: !open,
+        [classes.drawerOpen]: sidebarMenuOpen,
+        [classes.drawerClose]: !sidebarMenuOpen,
       })}
       classes={{
-        paper: classNames(classes.drawerPaper,{
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
+        paper: classNames(classes.drawerPaper, {
+          [classes.drawerOpen]: sidebarMenuOpen,
+          [classes.drawerClose]: !sidebarMenuOpen,
         }),
       }}
-      open={open}
+      open={sidebarMenuOpen}
     >
       <div className={classes.toolbar}>
-        <IconButton onClick={()=>handleToggleDrawer()}>
+        <IconButton onClick={() => dispatch(toggleSidebarMenu())}>
           <ChevronLeftIcon/>
         </IconButton>
       </div>

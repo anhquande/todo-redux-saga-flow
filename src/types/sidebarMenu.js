@@ -1,20 +1,14 @@
 // @flow
 
-export type MenuItemModel = {
-  +title: string,
-  subTitle: string,
-  tooltip: string,
-  icon: string,
-  active: boolean,
-  to:string,
-  visible:boolean,
-}
+import type { MenuItemModel } from './menu'
 
 export type SidebarMenuModel = Array<MenuItemModel>
 
 export type SidebarMenuState = {
-  +menu: SidebarMenuModel,
+  +sidebarMenuOpen:boolean,
+  +sidebarMenu: SidebarMenuModel,
 }
 
 export type SidebarMenuAction =
   | {type: "SET_SIDEBAR_MENU", +payload: SidebarMenuModel}
+  | {type: "TOGGLE_SIDEBAR_MENU"}
