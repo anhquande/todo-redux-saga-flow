@@ -48,3 +48,11 @@ export function usePageState() {
     }, []),
   )
 }
+
+export function useSidebarMenuState() {
+  return useMappedState(
+    useCallback(state => {
+      return state.sidebarMenuState
+    }, []),
+  )
+}

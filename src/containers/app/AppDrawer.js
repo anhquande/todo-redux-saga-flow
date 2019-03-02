@@ -5,22 +5,17 @@ import classNames from 'classnames'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List'
-import type { SidebarMenuModel } from '../../types/sidebarMenu'
 import { ListItemLink } from '../../components/ListItemLink'
+import { useSidebarMenuState } from '../../hooks/useReducer'
 
 function SidebarMenu() {
 
-  const model: SidebarMenuModel = [
-    { title: 'Todos', icon: 'todos', to: '/todos' },
-    { title: 'Tags', icon: 'tags', to: '/tags' },
-    { title: 'Imprint', icon: 'imprint', to: '/imprint' },
-    { title: 'Help', icon: 'help', to: '/help' },
-  ]
+  const { menu } = useSidebarMenuState()
 
   return (
     <>
       <List>
-        {model.map((item, index) => (
+        {menu.map((item, index) => (
           <ListItemLink key={item.to} to={item.to} primary={item.title} secondary={item.subTitle} icon={item.icon}/>
         ))}
 
