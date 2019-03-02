@@ -4,9 +4,20 @@ import MenuIcon from '@material-ui/icons/Menu'
 import IconButton from '@material-ui/core/IconButton'
 import { useDispatch } from 'redux-react-hook'
 import { toggleSidebarMenu } from '../../actions/sidebarMenu'
+import { useClasses } from '../../hooks/useClasses'
 
-export function ToggleMenuButton({classes}) {
+const styles = theme => {
+  return {
+    menuButton: {
+      marginLeft: 4,
+      marginRight: 4,
+    },
+  } // return
+} // styles
+
+export function ToggleMenuButton() {
   const dispatch = useDispatch()
+  const classes = useClasses(styles)
 
   return (
     <>

@@ -8,8 +8,50 @@ import { useDispatch } from 'redux-react-hook'
 import { SidebarMenu } from './SidebarMenu'
 import { useSidebarMenuState } from '../../hooks/useReducer'
 import { toggleSidebarMenu } from '../../actions/sidebarMenu'
+import { useClasses } from '../../hooks/useClasses'
 
-export function AppDrawer({ classes }) {
+const styles = theme => {
+  return {
+    drawer: {
+      [theme.breakpoints.up('sm')]: {
+        width: theme.app.drawer.maxWidth,
+        flexShrink: 0,
+      },
+    },
+    drawerPaper: {
+      width: theme.app.drawer.maxWidth,
+      backgroundColor: theme.app.sidebar.menuItem.backgroundColor,
+    },
+    drawerOpen: {
+      width: theme.app.drawer.maxWidth,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    drawerClose: {
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      overflowX: 'hidden',
+      width: 0,
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(7),
+      },
+    },
+    toolbar: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: '0 0px',
+      ...theme.mixins.toolbar,
+    },
+  } // return
+} // styles
+export function AppDrawer() {
+
+  const classes = useClasses(styles)
 
   const { sidebarMenuOpen } = useSidebarMenuState()
 

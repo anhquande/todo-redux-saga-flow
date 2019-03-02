@@ -1,10 +1,9 @@
 // @flow
-import React, { useState } from 'react'
+import React from 'react'
 import JssProvider from 'react-jss/lib/JssProvider'
 import { create } from 'jss'
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles'
 import { useClasses } from '../../hooks/useClasses'
-import { styles } from './styles'
 import { AppDrawer } from './AppDrawer'
 import { AppMain } from './AppMain'
 import { AppTopbar } from './AppTopbar'
@@ -27,7 +26,13 @@ const jss = create({
 })
 
 // end of css-injection-order
-
+const styles = theme => {
+  return {
+    root: {
+      display: 'flex',
+    },
+  } // return
+} // styles
 export function App() {
   const classes = useClasses(styles)
 
@@ -35,13 +40,11 @@ export function App() {
     <JssProvider jss={jss} generateClassName={generateClassName}>
 
       <div className={classes.root}>
-        <AppTopbar
-          classes={classes}
-        />
+        <AppTopbar/>
 
-        <AppDrawer classes={classes}/>
+        <AppDrawer/>
 
-        <AppMain classes={classes}/>
+        <AppMain/>
       </div>
     </JssProvider>
   ) // return

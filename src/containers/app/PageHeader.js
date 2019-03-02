@@ -1,8 +1,21 @@
 import React, { useEffect } from 'react'
 import Typography from '@material-ui/core/Typography'
 import { usePageState } from '../../hooks/useReducer'
+import { useClasses } from '../../hooks/useClasses'
 
-export function PageHeader({classes}) {
+const styles = theme => {
+  return {
+    title: {
+      display: 'none',
+      [theme.breakpoints.up('sm')]: {
+        display: 'block',
+      },
+    },
+  } // return
+} // styles
+
+export function PageHeader() {
+  const classes = useClasses(styles)
 
   const pageState = usePageState()
 

@@ -1,7 +1,26 @@
 import React from 'react'
 import routes from '../../routes'
+import { useClasses } from '../../hooks/useClasses'
 
-export function AppMain({classes}) {
+const styles = theme => {
+  return {
+    toolbar: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: '0 0px',
+      ...theme.mixins.toolbar,
+    },
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(3),
+    },
+  } // return
+} // styles
+export function AppMain() {
+
+  const classes = useClasses(styles)
+
   return (
       <main className={classes.content}>
         <div className={classes.toolbar}/>

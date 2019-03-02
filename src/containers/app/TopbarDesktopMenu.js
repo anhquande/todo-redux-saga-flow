@@ -4,8 +4,22 @@ import Badge from '@material-ui/core/Badge'
 import IconButton from '@material-ui/core/IconButton'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import AccountCircle from '@material-ui/icons/AccountCircle'
+import { useClasses } from '../../hooks/useClasses'
 
-export function TopbarDesktopMenu({ classes, isMenuOpen, handleProfileMenuOpen }) {
+const styles = theme => {
+  return {
+    sectionDesktop: {
+      display: 'none',
+      [theme.breakpoints.up('md')]: {
+        display: 'flex',
+      },
+    },
+  } // return
+} // styles
+
+export function TopbarDesktopMenu({ isMenuOpen, handleProfileMenuOpen }) {
+  const classes = useClasses(styles)
+
   return (
     <div className={classes.sectionDesktop}>
       <IconButton color="inherit">

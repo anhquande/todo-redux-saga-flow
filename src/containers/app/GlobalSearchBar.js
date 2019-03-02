@@ -6,7 +6,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator'
 import { useClasses } from '../../hooks/useClasses'
 
 // The Material-UI's class names follow a simple pattern in development mode: Mui[component name]-[style rule name]-[UUID]
-export const styles = theme => {
+const styles = theme => {
   return {
     // Search
     search: {

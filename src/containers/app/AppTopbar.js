@@ -10,12 +10,42 @@ import { TopbarDesktopMenu } from './TopbarDesktopMenu'
 import { ToggleMenuButton } from './ToggleMenuButton'
 import { MoreMobileMenuButton } from './MoreMobileMenuButton'
 import { useSidebarMenuState } from '../../hooks/useReducer'
+import { useClasses } from '../../hooks/useClasses'
 
-export function AppTopbar({
-                            classes,
-                            renderMyAccountMenu,
-                            isMobileOpen,
-                          }) {
+
+const styles = theme => {
+  return {
+    grow: {
+      flexGrow: 1,
+    },
+    appBar: {
+      paddingLeft: 0,
+      zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(['width', 'padding'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    },
+    appBarShift: {
+      paddingLeft: 0,
+      width: `calc(100% - ${theme.app.drawer.maxWidth}px)`,
+      transition: theme.transitions.create(['width', 'padding'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    toolbar: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: '0 0px',
+      ...theme.mixins.toolbar,
+    },
+  } // return
+} // styles
+
+export function AppTopbar() {
+  const classes = useClasses(styles)
 
   const { sidebarMenuOpen } = useSidebarMenuState()
 
@@ -49,20 +79,19 @@ export function AppTopbar({
               })}>
 
         <Toolbar disableGutters={!sidebarMenuOpen} className={classes.toolbar}>
-          <ToggleMenuButton classes={classes}/>
+          <ToggleMenuButton/>
 
-          <PageHeader classes={classes}/>
+          <PageHeader/>
 
           <div className={classes.grow}/>
 
           <GlobalSearchBar/>
 
           <TopbarDesktopMenu
-            classes={classes}
             handleProfileMenuOpen={handleProfileMenuOpen}
             isMenuOpen={isMenuOpen}/>
 
-          <MoreMobileMenuButton classes={classes} handleMobileMenuOpen={handleMobileMenuOpen}/>
+          <MoreMobileMenuButton handleMobileMenuOpen={handleMobileMenuOpen}/>
         </Toolbar>
       </AppBar>
 
