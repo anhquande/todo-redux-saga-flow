@@ -15,8 +15,9 @@ import Checkbox from '@material-ui/core/Checkbox'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
 import DeleteIcon from '@material-ui/icons/Delete'
-import FilterListIcon from '@material-ui/icons/FilterList'
-import { lighten } from '@material-ui/core/styles/colorManipulator'
+import SearchIcon from '@material-ui/icons/Search'
+import { fade, lighten } from '@material-ui/core/styles/colorManipulator'
+import InputBase from '@material-ui/core/InputBase'
 
 
 function desc(a, b, orderBy) {
@@ -122,10 +123,59 @@ const useToolbarStyles = makeStyles(theme => ({
     flex: '1 1 100%',
   },
   actions: {
+    display: "flex",
     color: theme.palette.text.secondary,
   },
   title: {
     flex: '0 0 auto',
+  },
+  search: {
+    display: 'flex',
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(2),
+      width: 'auto',
+    },
+  },
+  searchIcon: {
+    width: theme.spacing(6),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputRoot: {
+    color: 'inherit',
+    width: '100%',
+  },
+  inputInput: {
+    paddingTop: theme.spacing(),
+    paddingRight: theme.spacing(),
+    paddingBottom: theme.spacing(),
+    paddingLeft: theme.spacing(6),
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: 100,
+    },
+    '&:hover': {
+      borderBottom: '1px solid #cacaca',
+      width: 360,
+    },
+    '&:focus': {
+      borderBottom: '1px solid #777',
+      width: 360,
+    }
   },
 }))
 
@@ -133,6 +183,53 @@ const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles()
   const { numSelected } = props
   const { tableHeader } = props
+  const { showSearch } = props
+  const { handleSearch } = props
+  const { toolbarActions } = props
+
+  function renderSearch() {
+    if (showSearch) {
+      return (
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon/>
+          </div>
+          <InputBase
+            placeholder="Search…"
+            onChange={(e) => handleSearch && handleSearch(e.target.value)}
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+          />
+        </div>
+      )
+    }
+
+    return null
+  }
+
+  const renderToolbarActions = () => {
+
+    return (
+      <>
+        {toolbarActions && toolbarActions
+        .filter(a => a.canVisible && a.canVisible(numSelected))
+        .sort((a,b)=>a.renderOrder - b.renderOrder)
+        .map(a => {
+          return (
+            <Tooltip title={a.label} key={a.key}>
+              <IconButton aria-label={a.label} onClick={a.onClick}>
+                {a.icon}
+              </IconButton>
+            </Tooltip>
+          )
+        })}
+      </>
+    )
+
+  }
+
 
   return (
     <Toolbar
@@ -153,19 +250,8 @@ const EnhancedTableToolbar = props => {
       </div>
       <div className={classes.spacer}/>
       <div className={classes.actions}>
-        {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton aria-label="Delete">
-              <DeleteIcon/>
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon/>
-            </IconButton>
-          </Tooltip>
-        )}
+        {renderSearch()}
+        {renderToolbarActions()}
       </div>
     </Toolbar>
   )
@@ -201,6 +287,9 @@ function EnhancedTable({
                          defaultRowsPerPage = 25,
                          rowsPerPageOptions = [10, 25, 50],
                          defaultPage = 0,
+                         showSearch = true,
+                         handleSearch,
+                         toolbarActions = [],
                          rowClass,
                        }) {
   const classes = useStyles()
@@ -278,7 +367,11 @@ function EnhancedTable({
   return (
     <div>
       {/* <Paper className={classes.root}> */}
-      <EnhancedTableToolbar numSelected={selected.length} tableHeader={tableHeader}/>
+      <EnhancedTableToolbar numSelected={selected.length}
+                            tableHeader={tableHeader}
+                            toolbarActions={toolbarActions}
+                            handleSearch={handleSearch}
+                            showSearch={showSearch}/>
       <div className={classes.tableWrapper}>
         <Table className={classes.table} aria-labelledby="tableTitle">
           <EnhancedTableHead
@@ -293,7 +386,7 @@ function EnhancedTable({
           />
           <TableBody>
             {visibleRows
-            .map( (row, rowIndex) => {
+            .map((row, rowIndex) => {
               const isItemSelected = isSelected(row[idColumn])
               return (
                 <TableRow
@@ -303,7 +396,12 @@ function EnhancedTable({
                   tabIndex={-1}
                   key={row[idColumn]}
                   selected={isItemSelected}
-                  className={rowClass ? rowClass(row, rowIndex, isItemSelected, selected, visibleRows, classes) : ''}
+                  className={rowClass ? rowClass(row,
+                    rowIndex,
+                    isItemSelected,
+                    selected,
+                    visibleRows,
+                    classes) : ''}
                 >
                   {selectionMode !== 'none' && (
                     <TableCell padding="checkbox" role="checkbox" key="checkbox">

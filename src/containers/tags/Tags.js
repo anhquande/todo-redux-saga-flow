@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@material-ui/styles'
 import { lighten } from '@material-ui/core/styles/colorManipulator'
 import classNames from 'classnames'
+import FilterListIcon from '@material-ui/icons/FilterList'
+import DeleteIcon from '@material-ui/icons/Delete'
 import { useTags } from '../../hooks/useReducer'
 import { setPageHeader } from '../../actions/page'
 import type { TagsState } from '../../repository/tag/types'
@@ -12,45 +14,45 @@ import { TagRepository } from '../../repository/tag/repository'
 import EnhancedTable from '../../components/EnhancedTable'
 
 const useRowStyles = makeStyles(theme => ({
-    rowSelected:
-      theme.palette.type === 'light'
-        ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-        : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-    rowEven:
-      {
+  rowSelected:
+    theme.palette.type === 'light'
+      ? {
         color: theme.palette.secondary.main,
         backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      }
+      : {
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark,
       },
-    rowOdd: {
+  rowEven:
+    {
       color: theme.palette.secondary.main,
-      backgroundColor: lighten(theme.palette.primary.light, 0.85),
+      backgroundColor: lighten(theme.palette.secondary.light, 0.85),
     },
-    rowHighlight:
-      {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.primary.dark,
-      },
-    rowOnly:
-      {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.primary.dark,
-      },
-    rowFirst:
-      {
-        color: theme.palette.text.error,
-        backgroundColor: theme.palette.primary.dark,
-      },
-    rowLast:
-      {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.primary.dark,
-      },
+  rowOdd: {
+    color: theme.palette.secondary.main,
+    backgroundColor: lighten(theme.palette.primary.light, 0.85),
+  },
+  rowHighlight:
+    {
+      color: theme.palette.text.primary,
+      backgroundColor: theme.palette.primary.dark,
+    },
+  rowOnly:
+    {
+      color: theme.palette.text.primary,
+      backgroundColor: theme.palette.primary.dark,
+    },
+  rowFirst:
+    {
+      color: theme.palette.text.error,
+      backgroundColor: theme.palette.primary.dark,
+    },
+  rowLast:
+    {
+      color: theme.palette.text.primary,
+      backgroundColor: theme.palette.primary.dark,
+    },
 
 }))
 
@@ -92,6 +94,10 @@ export function Tags() {
     return row.usages
   }
 
+  function handleSearch(searchTerm) {
+    console.log("handleSearch: ", searchTerm)
+  }
+
   const customRowClasses = useRowStyles()
 
   const rowClass = (row, rowIndex, isRowSelected, selectedRows, visibleRows, tableClasses) => {
@@ -111,7 +117,7 @@ export function Tags() {
       [customRowClasses.rowFirst]: isFirstRow,
     })
 
-    console.log("className: ",className)
+    console.log("className: ", className)
     return className
   }
 
@@ -132,6 +138,33 @@ export function Tags() {
     }
   ]
 
+  const handleFilter = (e) => {
+    console.log("Handle Filter ...")
+  }
+  const handleDelete = (e) => {
+    console.log("Handle delete ...")
+  }
+
+  const toolbarActions = [
+
+    {
+      renderOrder: 1,
+      key: 'action_delete',
+      label: "Filter",
+      icon: <DeleteIcon/>,
+      onClick: handleDelete,
+      canVisible: (numSelected) => numSelected > 0
+    },
+    {
+      renderOrder: 2,
+      key: 'action_filter',
+      label: "Filter",
+      icon: <FilterListIcon/>,
+      onClick: handleFilter,
+      canVisible: () => true
+    },
+  ]
+
   return (
     <>
       <div>
@@ -145,6 +178,8 @@ export function Tags() {
                            defaultOrderDirection="asc"
                            selectionMode="multiple"
                            rowClass={rowClass}
+                           handleSearch={handleSearch}
+                           toolbarActions={toolbarActions}
             />
           </div>
         )}
