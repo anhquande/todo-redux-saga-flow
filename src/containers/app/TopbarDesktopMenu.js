@@ -9,7 +9,7 @@ import { useDispatch } from 'redux-react-hook'
 import { useClasses } from '../../hooks/useClasses'
 import { useTopbarMenuState } from '../../hooks/useReducer'
 import { Icon } from '../../components/Icon'
-import type { MenuItemModel } from '../../types/menu';
+import type { MenuItemModel } from '../../types/menu'
 
 const styles = theme => {
   return {
@@ -42,7 +42,7 @@ export function TopbarDesktopMenu({ isMenuOpen, handleProfileMenuOpen }) {
       {topbarMenu
       .filter(item => item.visibleOnDesktop)
       .map(item => (
-        <IconButton color="inherit" onClick={(event) => handleEvent (event,item)}
+        <IconButton key={item.id} color="inherit" onClick={(event) => handleEvent (event,item)}
 
         >
           {item.badgeVisible ? (
