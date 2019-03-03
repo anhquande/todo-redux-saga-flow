@@ -7,6 +7,7 @@ import layout from './layout'
 import localeState from './locale'
 import pageState from './page'
 import sidebarMenuState from './sidebarMenu'
+import topbarMenuState from './topbarMenu'
 import tagsState from '../repository/tag/reducers'
 
 export default (history) => combineReducers({
@@ -18,5 +19,6 @@ export default (history) => combineReducers({
   pageState,
   tagsState,
   sidebarMenuState,
+  topbarMenuState,
 })
 

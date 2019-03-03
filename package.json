@@ -63,6 +63,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
     "babel-preset-flow": "^6.23.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.0.0",

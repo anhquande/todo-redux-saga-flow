@@ -1,15 +1,17 @@
 // @flow
 
-import type { TopbarMenuState, TopbarMenuAction } from '../types/topbarMenu'
-
+import type { TopbarMenuAction, TopbarMenuState } from '../types/topbarMenu'
+import { createIconOnlyMenuItem } from '../types/menu'
 const initState: TopbarMenuState = {
   topbarMenu: [
-    { title: 'Todos', icon: 'todos', to: '/todos' },
-    { title: 'Tags', icon: 'tags', to: '/tags' },
-    { title: 'Imprint', icon: 'imprint', to: '/imprint' },
-    { title: 'Help', icon: 'help', to: '/help' },
+    createIconOnlyMenuItem("TM_NOTIFICATiONS",'Notifications', 'notifications', '/todos', {badgeVisible:true, badge:9}),
+    createIconOnlyMenuItem("TM_ACCOUNT",'My Account', 'accountCircle', '',
+      {badgeVisible:true,
+        badge:9,
+      }),
   ],
 }
+
 
 const topbarMenuReducer = (state: TopbarMenuState = initState, action: TopbarMenuAction): TopbarMenuState => {
   switch (action.type) {

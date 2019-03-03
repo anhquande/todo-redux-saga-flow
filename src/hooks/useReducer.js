@@ -56,3 +56,10 @@ export function useSidebarMenuState() {
     }, []),
   )
 }
+export function useTopbarMenuState() {
+  return useMappedState(
+    useCallback(state => {
+      return state.topbarMenuState
+    }, []),
+  )
+}

@@ -9,7 +9,9 @@ export function SidebarMenu() {
 
   return (
     <List>
-      {sidebarMenu.map(item => (
+      {sidebarMenu
+      .filter(item => item.visible)
+      .map(item => (
         <ListItemLink key={item.to}
                       to={item.to}
                       primary={item.title}

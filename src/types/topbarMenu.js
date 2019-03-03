@@ -1,12 +1,10 @@
 // @flow
 
-import type { MenuItemModel } from './menu'
-
-export type TopbarMenuModel = Array<MenuItemModel>
+import type { MenuModel } from './menu'
 
 export type TopbarMenuState = {
-  +topbarMenu: TopbarMenuModel,
+  +topbarMenu: MenuModel,
 }
 
 export type TopbarMenuAction =
-  | {type: "SET_TOPBAR_MENU", +payload: TopbarMenuModel}
+  | {type: "SET_TOPBAR_MENU", +payload: MenuModel}

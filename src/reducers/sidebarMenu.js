@@ -1,14 +1,17 @@
 // @flow
 
 import type { SidebarMenuState, SidebarMenuAction } from '../types/sidebarMenu'
+import { createTextMenuItem } from '../types/menu'
+import IconButton from '../containers/app/TopbarDesktopMenu';
+import React from 'react';
 
 const initState: SidebarMenuState = {
   sidebarMenuOpen: true,
   sidebarMenu: [
-    { title: 'Todos', icon: 'todos', to: '/todos' },
-    { title: 'Tags', icon: 'tags', to: '/tags' },
-    { title: 'Imprint', icon: 'imprint', to: '/imprint' },
-    { title: 'Help', icon: 'help', to: '/help' },
+    createTextMenuItem('SM_TODOS','Todos', 'todos', '/todos'),
+    createTextMenuItem('SM_TAGS','Tags', 'tags', '/tags'),
+    createTextMenuItem('SM_IMPRINT','Imprint', 'imprint', '/imprint'),
+    createTextMenuItem('SM_HELP','Help', 'help', '/help'),
   ],
 }
 
