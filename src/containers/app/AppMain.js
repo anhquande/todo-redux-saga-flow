@@ -13,7 +13,7 @@ const styles = theme => {
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
+      padding: theme.spacing(0),
     },
   } // return
 } // styles
@@ -23,6 +23,7 @@ export function AppMain() {
 
   return (
       <main className={classes.content}>
+        <div className={classes.toolbar}/>
         <div className={classes.toolbar}/>
         { routes }
       </main>

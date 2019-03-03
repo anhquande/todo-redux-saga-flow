@@ -7,7 +7,7 @@ import { useClasses } from '../../hooks/useClasses'
 import { AppDrawer } from './AppDrawer'
 import { AppMain } from './AppMain'
 import { AppTopbar } from './AppTopbar'
-import { NotificationDrawer } from './NotificationDrawer';
+import { NotificationDrawer } from './NotificationDrawer'
 
 // Change the css injection order so that our style can override the built-in css
 // How to do it?

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import classNames from 'classnames'
 import Toolbar from '@material-ui/core/Toolbar'
 import AppBar from '@material-ui/core/AppBar'
+import Divider from '@material-ui/core/Divider'
 import { PageHeader } from './PageHeader'
 import { GlobalSearchBar } from './GlobalSearchBar'
 import { TopbarMobileMenu } from './TopbarMobileMenu'
@@ -20,6 +21,8 @@ const styles = theme => {
     },
     appBar: {
       paddingLeft: 0,
+      width: `calc(100% - ${theme.app.drawer.minWidth-17}px)`,
+
       zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(['width', 'padding'], {
         easing: theme.transitions.easing.sharp,
@@ -93,6 +96,8 @@ export function AppTopbar() {
 
           <MoreMobileMenuButton handleMobileMenuOpen={handleMobileMenuOpen}/>
         </Toolbar>
+        <Divider/>
+        <Toolbar/>
       </AppBar>
 
       <MyAccountPopupMenu
