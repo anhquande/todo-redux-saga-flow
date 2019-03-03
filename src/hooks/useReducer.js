@@ -56,6 +56,14 @@ export function useSidebarMenuState() {
     }, []),
   )
 }
+export function useNotificationDrawerState() {
+  return useMappedState(
+    useCallback(state => {
+      return state.notificationDrawerState
+    }, []),
+  )
+}
+
 export function useTopbarMenuState() {
   return useMappedState(
     useCallback(state => {

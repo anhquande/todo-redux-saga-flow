@@ -30,8 +30,8 @@ const styles = theme => ({
   }
 })
 
-export function ListItemLink({ icon, primary, secondary, to }) {
-  const renderLink = itemProps => <RouterLink to={to} {...itemProps}/>
+export function ListItemLink({ icon, primary, secondary, to, linkOptions }) {
+  const renderLink = itemProps => <RouterLink to={to} {...itemProps} {...linkOptions}/>
   const classes = useClasses(styles)
   return (
     <>

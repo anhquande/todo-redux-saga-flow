@@ -10,6 +10,7 @@ import { useClasses } from '../../hooks/useClasses'
 import { useTopbarMenuState } from '../../hooks/useReducer'
 import { Icon } from '../../components/Icon'
 import type { MenuItemModel } from '../../types/menu'
+import { openNotificationDrawer } from '../../actions/notificationDrawer'
 
 const styles = theme => {
   return {
@@ -29,10 +30,18 @@ export function TopbarDesktopMenu({ isMenuOpen, handleProfileMenuOpen }) {
   const renderLink = (to,itemProps) => <RouterLink to={to} {...itemProps}/>
 
   const dispatch = useDispatch()
+
+  const handleOpenNotificationDrawer = () => {
+    console.log("handleOpenNotification")
+    dispatch(openNotificationDrawer())
+  }
   const handleEvent = (event, item:MenuItemModel) => {
 
     if (item.id === 'TM_ACCOUNT'){
       handleProfileMenuOpen(event)
+    }
+    else if (item.id === 'TM_NOTIFICATIONS'){
+      handleOpenNotificationDrawer()
     }
     console.log("event: ", event, item)
   }
