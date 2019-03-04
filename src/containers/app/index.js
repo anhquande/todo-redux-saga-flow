@@ -34,6 +34,7 @@ const styles = theme => {
     },
   } // return
 } // styles
+
 export function App() {
   const classes = useClasses(styles)
 

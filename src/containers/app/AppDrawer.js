@@ -1,33 +1,76 @@
 import React from 'react'
 import Drawer from '@material-ui/core/Drawer'
-import IconButton from '@material-ui/core/IconButton'
 import classNames from 'classnames'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import Divider from '@material-ui/core/Divider'
 import { useDispatch } from 'redux-react-hook'
+import Grid from '@material-ui/core/Grid'
+import Avatar from '@material-ui/core/Avatar' // Import using relative path
 import { SidebarMenu } from './SidebarMenu'
 import { useSidebarMenuState } from '../../hooks/useReducer'
-import { toggleSidebarMenu } from '../../actions/sidebarMenu'
 import { useClasses } from '../../hooks/useClasses'
+import Logo from '../../static/images/logo.png' // Import using relative path
+import LogoSmall from '../../static/images/logo-small.png'
+import MyAvatar from '../../static/images/avatar.png'
+import { Icon } from '../../components/Icon'
 
 const styles = theme => {
   return {
+    avatarRoot: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(1),
+    },
+    avatarRootOpen: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(1),
+    },
+    avatarRootClose: {
+      paddingLeft: theme.spacing(1),
+      paddingRight: theme.spacing(1),
+    },
+    avatar: {},
+    avatarOpen: {
+      width: theme.spacing(6),
+      height: theme.spacing(6),
+    },
+    avatarClose: {
+      width: theme.spacing(3),
+      height: theme.spacing(3),
+    },
+    link: {
+      color: theme.app.color.link.normal,
+      fontSize: '1rem',
+      fontFamily: theme.typography.fontFamily,
+      textDecoration: 'none',
+    },
+    logoRoot: {
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
+    },
+    logoRootOpen: {
+      paddingLeft: theme.spacing(2),
+    },
+    logoRootClose: {
+      paddingLeft: theme.spacing(1),
+    },
     logo: {
       display: 'block',
       height: 26,
+      backgroundRepeat: 'no-repeat',
     },
-    logoRoot:{
-      display: 'block',
-      padding:10,
-    },
-    drawer: {
+    logoOpen: {
+      backgroundImage: `url(${LogoSmall})`,
       [theme.breakpoints.up('sm')]: {
-        width: theme.app.drawer.maxWidth,
-        flexShrink: 0,
+        backgroundImage: `url(${Logo})`,
       },
     },
+    logoClose: {
+      backgroundImage: `url(${LogoSmall})`,
+      [theme.breakpoints.up('sm')]: {
+        backgroundImage: `url(${LogoSmall})`,
+      },
+    },
+    drawer: {},
     drawerPaper: {
-      width: theme.spacing(5)+2,
+      width: theme.spacing(5) + 2,
 
       // width: theme.app.drawer.maxWidth,
       backgroundColor: theme.app.sidebar.menuItem.backgroundColor,
@@ -47,17 +90,30 @@ const styles = theme => {
       overflowX: 'hidden',
       width: 0,
       [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(5)+2,
+        width: theme.spacing(5) + 2,
       },
     },
     toolbar: {
-      minHeight:48,
+      minHeight: 48,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
       padding: '0 0px',
       ...theme.mixins.toolbar,
     },
+    logoutIcon: {
+      position: 'relative',
+      top: '4px'
+    },
+
+    profileLink: {},
+    profileLinkOpen: {
+      display: 'block',
+    },
+    profileLinkClose: {
+      display: 'none',
+    },
+
   } // return
 } // styles
 export function AppDrawer() {
@@ -65,8 +121,6 @@ export function AppDrawer() {
   const classes = useClasses(styles)
 
   const { sidebarMenuOpen } = useSidebarMenuState()
-
-  const dispatch = useDispatch()
 
   return (
     <Drawer
@@ -83,12 +137,61 @@ export function AppDrawer() {
       }}
       open={sidebarMenuOpen}
     >
-      <div className={classes.logoRoot}>
-        <a href="/" title="Home" className={classes.logo}>
-          <img src="http://via.placeholder.com/120x26" alt="app-logo"/>
+      <div className={classNames(classes.logoRoot, {
+        [classes.logoRootOpen]: sidebarMenuOpen,
+        [classes.logoRootClose]: !sidebarMenuOpen,
+      })}>
+        <a href="/" title="Home"
+           className={classNames(classes.logo, {
+             [classes.logoOpen]: sidebarMenuOpen,
+             [classes.logoClose]: !sidebarMenuOpen,
+           })}
+        >
         </a>
       </div>
-      <Divider/>
+
+      <Grid container justify="flex-start" alignItems="center">
+        <Grid item className={classNames(classes.avatarRoot, {
+          [classes.avatarRootOpen]: sidebarMenuOpen,
+          [classes.avatarRootClose]: !sidebarMenuOpen,
+        })}
+        >
+          <a href="/myaccount" title="Logout"
+             className={classNames(classes.link)}>
+            <Avatar alt="Remy Sharp" src={MyAvatar}
+                    className={classNames(classes.avatar, {
+                      [classes.avatarOpen]: sidebarMenuOpen,
+                      [classes.avatarClose]: !sidebarMenuOpen,
+                    })}
+            />
+          </a>
+        </Grid>
+        <Grid item xs={10} sm container justify="flex-start"
+              className={classNames(classes.profileLink, {
+                [classes.profileLinkOpen]: sidebarMenuOpen,
+                [classes.profileLinkClose]: !sidebarMenuOpen,
+              })}
+        >
+          <Grid item xs container direction="column" justify="flex-start">
+            <Grid item xs>
+              <a href="/myaccount" title="Logout"
+                 className={classNames(classes.link)}
+              >
+                My Profile
+              </a>
+            </Grid>
+            <Grid item>
+              <a href="/logout" title="Logout"
+                 className={classNames(classes.link)}
+              >
+                <Icon name="logout" fontSize="small" className={classes.logoutIcon}/> Logout
+              </a>
+            </Grid>
+          </Grid>
+        </Grid>
+
+      </Grid>
+
       <SidebarMenu/>
     </Drawer>
   ) // renderDrawer

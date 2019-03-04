@@ -3,7 +3,6 @@
 import React from 'react'
 import Badge from '@material-ui/core/Badge'
 import IconButton from '@material-ui/core/IconButton'
-import AccountCircle from '@material-ui/icons/AccountCircle'
 import { NavLink as RouterLink } from 'react-router-dom'
 import { useDispatch } from 'redux-react-hook'
 import { useClasses } from '../../hooks/useClasses'

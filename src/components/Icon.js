@@ -8,8 +8,9 @@ import HelpIcon from '@material-ui/icons/Help'
 import ImprintIcon from '@material-ui/icons/ImportContacts'
 import TodosIcon from '@material-ui/icons/ListAltOutlined'
 import TagsIcon from '@material-ui/icons/Label'
+import LogoutIcon from '@material-ui/icons/PowerSettingsNew'
 
-export function Icon({name, ...options}) {
+export function Icon({name,...options}) {
   if (name === 'todos') return (<TodosIcon {...options}/>)
   if (name === 'help') return (<HelpIcon {...options}/>)
   if (name === 'imprint') return (<ImprintIcon {...options}/>)
@@ -18,6 +19,7 @@ export function Icon({name, ...options}) {
   if (name === 'notifications') return (<NotificationsIcon {...options}/>)
   if (name === 'accountCircle') return (<AccountCircleIcon {...options}/>)
   if (name === 'tags') return (<TagsIcon {...options}/>)
+  if (name === 'logout') return (<LogoutIcon {...options}/>)
 
   return (<MoreIcon {...options}/>)
 
