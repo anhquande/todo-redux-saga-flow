@@ -58,8 +58,8 @@ export default function createAppTheme(options: ThemeOptions) {
         },
         table: {
           rowSelected: {
-            color: textColor,
-            backgroundColor: '#d3e3ff',
+            color: `${textColor}`,
+            backgroundColor: '#d3e3ff !important',
           },
           rowOdd: {
             color: textColor,
