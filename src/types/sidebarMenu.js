@@ -1,12 +1,12 @@
 // @flow
 
-import type {  MenuModel } from './menu'
+import type { MenuSectionList } from './menu'
 
 export type SidebarMenuState = {
   +sidebarMenuOpen:boolean,
-  +sidebarMenu: MenuModel,
+  +sidebarMenu: MenuSectionList,
 }
 
 export type SidebarMenuAction =
-  | {type: "SET_SIDEBAR_MENU", +payload: MenuModel}
+  | {type: "SET_SIDEBAR_MENU", +payload: MenuSectionList}
   | {type: "TOGGLE_SIDEBAR_MENU"}

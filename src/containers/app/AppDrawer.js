@@ -1,7 +1,6 @@
 import React from 'react'
 import Drawer from '@material-ui/core/Drawer'
 import classNames from 'classnames'
-import { useDispatch } from 'redux-react-hook'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar' // Import using relative path
 import { SidebarMenu } from './SidebarMenu'
@@ -17,6 +16,7 @@ const styles = theme => {
     avatarRoot: {
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(1),
+      paddingBottom:theme.spacing(3),
     },
     avatarRootOpen: {
       paddingLeft: theme.spacing(2),

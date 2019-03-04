@@ -1,18 +1,22 @@
 // @flow
 
-import type { SidebarMenuState, SidebarMenuAction } from '../types/sidebarMenu'
-import { createTextMenuItem } from '../types/menu'
-import IconButton from '../containers/app/TopbarDesktopMenu';
-import React from 'react';
+import type { SidebarMenuAction, SidebarMenuState } from '../types/sidebarMenu'
+import { createMenuSection, createTextMenuItem } from '../types/menu'
+
+const sectionMain=createMenuSection('SEC_MAIN', "Main", [
+  createTextMenuItem('SM_TODOS','Todos', 'todos', '/todos'),
+  createTextMenuItem('SM_TAGS','Tags', 'tags', '/tags'),
+  createTextMenuItem('SM_HELP','Help', 'help', '/help'),
+])
+const sectionHelp=createMenuSection('SEC_HELP', "Support", [
+  createTextMenuItem('SM_HELP','Help', 'help', 'http://help.me.please.com'),
+  createTextMenuItem('SM_FEEDBACK','Feedback', 'tags', '/feedback'),
+  createTextMenuItem('SM_IMPRINT','Imprint', 'imprint', '/imprint'),
+])
 
 const initState: SidebarMenuState = {
   sidebarMenuOpen: true,
-  sidebarMenu: [
-    createTextMenuItem('SM_TODOS','Todos', 'todos', '/todos'),
-    createTextMenuItem('SM_TAGS','Tags', 'tags', '/tags'),
-    createTextMenuItem('SM_IMPRINT','Imprint', 'imprint', '/imprint'),
-    createTextMenuItem('SM_HELP','Help', 'help', '/help'),
-  ],
+  sidebarMenu: [sectionMain, sectionHelp],
 }
 
 const sidebarMenuReducer = (state: SidebarMenuState = initState, action: SidebarMenuAction): SidebarMenuState => {

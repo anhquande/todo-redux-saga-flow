@@ -46,6 +46,14 @@ export default function createAppTheme(options: ThemeOptions) {
         },
         secondTopBar: {
           backgroundColor: '#eeeeee',
+        },
+        menu: {
+          section: {
+            header: {
+              color: '#ceeffb',
+              backgroundColor: 'rgba(76,83,87,0.33)'
+            }
+          }
         }
       },
       drawer: {
