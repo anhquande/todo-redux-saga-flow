@@ -12,6 +12,14 @@ import { useClasses } from '../../hooks/useClasses'
 
 const styles = theme => {
   return {
+    logo: {
+      display: 'block',
+      height: 26,
+    },
+    logoRoot:{
+      display: 'block',
+      padding:10,
+    },
     drawer: {
       [theme.breakpoints.up('sm')]: {
         width: theme.app.drawer.maxWidth,
@@ -19,7 +27,9 @@ const styles = theme => {
       },
     },
     drawerPaper: {
-      width: theme.app.drawer.maxWidth,
+      width: theme.spacing(5)+2,
+
+      // width: theme.app.drawer.maxWidth,
       backgroundColor: theme.app.sidebar.menuItem.backgroundColor,
     },
     drawerOpen: {
@@ -37,10 +47,11 @@ const styles = theme => {
       overflowX: 'hidden',
       width: 0,
       [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(7),
+        width: theme.spacing(5)+2,
       },
     },
     toolbar: {
+      minHeight:48,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
@@ -72,10 +83,10 @@ export function AppDrawer() {
       }}
       open={sidebarMenuOpen}
     >
-      <div className={classes.toolbar}>
-        <IconButton onClick={() => dispatch(toggleSidebarMenu())}>
-          <ChevronLeftIcon/>
-        </IconButton>
+      <div className={classes.logoRoot}>
+        <a href="/" title="Home" className={classes.logo}>
+          <img src="http://via.placeholder.com/120x26" alt="app-logo"/>
+        </a>
       </div>
       <Divider/>
       <SidebarMenu/>

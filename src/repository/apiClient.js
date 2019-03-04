@@ -48,13 +48,11 @@ const tagArraySchema = new schema.Array( new schema.Array(tagSchema))
 
 export function apiClient(action) {
 
-  console.log("apiClient: action =", action)
   switch (action.type) {
     case TagRepository.TAG.FIND_ALL.TRIGGER:
 
       const result = callApi('/tags', HTTP_METHOD.GET, tagArraySchema)
 
-      console.log("Result: ", result)
       return result
     default:
       console.log("make apiClient request: ", action)

@@ -1,7 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -18,6 +17,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import SearchIcon from '@material-ui/icons/Search'
 import { fade, lighten } from '@material-ui/core/styles/colorManipulator'
 import InputBase from '@material-ui/core/InputBase'
+import { useClasses } from '../../hooks/useClasses'
 
 
 function desc(a, b, orderBy) {
@@ -105,7 +105,7 @@ EnhancedTableHead.propTypes = {
   columns: PropTypes.array.isRequired,
 }
 
-const useToolbarStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
     paddingRight: theme.spacing(),
   },
@@ -177,10 +177,10 @@ const useToolbarStyles = makeStyles(theme => ({
       width: 360,
     }
   },
-}))
+})
 
 const EnhancedTableToolbar = props => {
-  const classes = useToolbarStyles()
+  const classes = useClasses(styles)
   const { numSelected } = props
   const { tableHeader } = props
   const { showSearch } = props
@@ -262,7 +262,7 @@ EnhancedTableToolbar.propTypes = {
   tableHeader: PropTypes.string.isRequired,
 }
 
-const useStyles = makeStyles(theme => ({
+const tableStyles = theme => ({
   root: {
     width: '100%',
     marginTop: theme.spacing(3),
@@ -273,7 +273,7 @@ const useStyles = makeStyles(theme => ({
   tableWrapper: {
     overflowX: 'auto',
   },
-}))
+})
 
 function EnhancedTable({
                          data,
@@ -292,7 +292,7 @@ function EnhancedTable({
                          toolbarActions = [],
                          rowClass,
                        }) {
-  const classes = useStyles()
+  const classes = useClasses(tableStyles)
   const [order, setOrder] = React.useState(defaultOrderDirection)
   const [orderBy, setOrderBy] = React.useState(defaultOrderBy)
   const [selected, setSelected] = React.useState(defaultSelected)

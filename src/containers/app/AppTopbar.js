@@ -15,15 +15,20 @@ import { useClasses } from '../../hooks/useClasses'
 
 
 const styles = theme => {
+  console.log("THEME: ",theme)
   return {
     grow: {
       flexGrow: 1,
     },
     appBar: {
+      backgroundColor: theme.app.color.topBar.backgroundColor,
       paddingLeft: 0,
-      width: `calc(100% - ${theme.app.drawer.minWidth-17}px)`,
+      width: `100%`,
 
-      zIndex: theme.zIndex.drawer + 1,
+      [theme.breakpoints.up('sm')]: {
+        width: `calc(100% - ${theme.app.drawer.minWidth-31}px)`,
+      },
+        zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(['width', 'padding'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -31,13 +36,22 @@ const styles = theme => {
     },
     appBarShift: {
       paddingLeft: 0,
-      width: `calc(100% - ${theme.app.drawer.maxWidth}px)`,
+      width: `calc(100% - ${theme.app.drawer.maxWidth + 1}px)`,
       transition: theme.transitions.create(['width', 'padding'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
       }),
     },
+    secondTopBar: {
+      backgroundColor: theme.app.color.secondTopBar.backgroundColor,
+      minHeight:48,
+    },
+
     toolbar: {
+      minHeight:'48px',
+      [theme.breakpoints.up('sm')]: {
+        minHeight:'48px',
+      },
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
@@ -97,7 +111,7 @@ export function AppTopbar() {
           <MoreMobileMenuButton handleMobileMenuOpen={handleMobileMenuOpen}/>
         </Toolbar>
         <Divider/>
-        <Toolbar/>
+        <Toolbar className={classes.secondTopBar}/>
       </AppBar>
 
       <MyAccountPopupMenu

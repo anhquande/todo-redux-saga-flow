@@ -11,6 +11,7 @@ const styles = theme => {
     menuButton: {
       marginLeft: 4,
       marginRight: 4,
+      color: theme.app.color.link.normal
     },
   } // return
 } // styles

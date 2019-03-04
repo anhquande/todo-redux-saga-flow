@@ -5,6 +5,7 @@ import { useClasses } from '../../hooks/useClasses'
 const styles = theme => {
   return {
     toolbar: {
+      minHeight:48,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',

@@ -12,6 +12,7 @@ import createAppTheme from './themes/createAppTheme'
 import './i18n'
 import { App } from './containers/app/index'
 import rootSaga from './sagas'
+import 'typeface-roboto'
 
 const themeOptions = {
   palette: {

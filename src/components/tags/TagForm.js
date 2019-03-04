@@ -11,11 +11,9 @@ import { Prompt } from 'react-router'
 function useDirtyForm(onUnload, dirty){
 
   useEffect( ()=>{
-    console.log("addEventListener beforeunload...")
     window.removeEventListener('beforeunload',onUnload)
     window.addEventListener('beforeunload', onUnload)
     return ()=>{
-      console.log("removeEventListener beforeunload...")
       window.removeEventListener('beforeunload',onUnload)
     }
   },[dirty])
@@ -132,7 +130,6 @@ export function TagForm({ handleSubmit }) {
   }
 
   function handleBlur(e:any) {
-    console.log("handleBlur: ",e)
   }
 
   return (

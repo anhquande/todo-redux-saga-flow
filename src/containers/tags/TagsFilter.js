@@ -13,9 +13,7 @@ import { getFilter } from '../../repository/tag/selectors'
 export function TagsFilter() {
 
   const tagsState = useTags()
-  console.log("tagsState:",tagsState)
   const tagsFilter = getFilter(tagsState)
-  console.log("tagsFilter: :",tagsFilter)
 
   const [value, setValue] = useState(tagsFilter)
 

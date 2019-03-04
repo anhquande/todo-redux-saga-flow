@@ -7,17 +7,14 @@ import type { VisibilityFilter } from '../types/visibilityFilter'
 import type { TodoList } from '../types/todos'
 
 const todosSelector = (state: State) => {
-  console.log("todosSelector: state=",state)
   return state.todos
 }
 const visibilityFilterSelector = (state: State) => {
-  console.log("visibilityFilterSelector: state=",state)
   return state.visibilityFilter
 }
 
 
 export const doFilter = (todos: TodoList, visibilityFilter: VisibilityFilter) => {
-  console.log("[visibleTodosSelector] visibilityFilter=, todos=",visibilityFilter, todos )
   switch (visibilityFilter) {
     case 'SHOW_NEW':
       return todos.filter(t => t.status === 'new')

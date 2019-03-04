@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'redux-react-hook'
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/styles'
 import { lighten } from '@material-ui/core/styles/colorManipulator'
 import classNames from 'classnames'
 import FilterListIcon from '@material-ui/icons/FilterList'
@@ -12,8 +11,9 @@ import type { TagsState } from '../../repository/tag/types'
 import { getTagIds, getVisibleTags } from '../../repository/tag/selectors'
 import { TagRepository } from '../../repository/tag/repository'
 import EnhancedTable from '../../components/EnhancedTable'
+import { useClasses } from '../../hooks/useClasses'
 
-const useRowStyles = makeStyles(theme => ({
+const styles = theme => ({
   rowSelected:
     theme.palette.type === 'light'
       ? {
@@ -54,9 +54,11 @@ const useRowStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.primary.dark,
     },
 
-}))
+})
 
 export function Tags() {
+  const classes = useClasses(styles)
+
   const { t, i18n } = useTranslation()
 
   const tagsState: TagsState = useTags()
@@ -95,10 +97,7 @@ export function Tags() {
   }
 
   function handleSearch(searchTerm) {
-    console.log("handleSearch: ", searchTerm)
   }
-
-  const customRowClasses = useRowStyles()
 
   const rowClass = (row, rowIndex, isRowSelected, selectedRows, visibleRows, tableClasses) => {
 
@@ -109,15 +108,14 @@ export function Tags() {
     const isEvenRow = !isOddRow
 
     const className = classNames({
-      [customRowClasses.rowOnly]: isOnlyRow,
-      [customRowClasses.rowEven]: isEvenRow,
-      [customRowClasses.rowOdd]: isOddRow,
-      // [customRowClasses.rowSelected]: isRowSelected,
-      [customRowClasses.rowLast]: isLastRow,
-      [customRowClasses.rowFirst]: isFirstRow,
+      [classes.rowOnly]: isOnlyRow,
+      [classes.rowEven]: isEvenRow,
+      [classes.rowOdd]: isOddRow,
+      // [classes.rowSelected]: isRowSelected,
+      [classes.rowLast]: isLastRow,
+      [classes.rowFirst]: isFirstRow,
     })
 
-    console.log("className: ", className)
     return className
   }
 
@@ -139,10 +137,8 @@ export function Tags() {
   ]
 
   const handleFilter = (e) => {
-    console.log("Handle Filter ...")
   }
   const handleDelete = (e) => {
-    console.log("Handle delete ...")
   }
 
   const toolbarActions = [

@@ -41,9 +41,10 @@ export function App() {
     <JssProvider jss={jss} generateClassName={generateClassName}>
 
       <div className={classes.root}>
+        <AppDrawer/>
+
         <AppTopbar/>
 
-        <AppDrawer/>
         <NotificationDrawer/>
 
         <AppMain/>

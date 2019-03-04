@@ -75,7 +75,6 @@ export function GlobalSearchBar() {
   const { t } = useTranslation()
 
   const onSearchTermChange = (e) => {
-    console.log("onSearchTermChange: ",e,e.target.value)
 
     if (window.handleGlobalSearch){
       window.handleGlobalSearch(e.target.value)

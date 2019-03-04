@@ -32,7 +32,6 @@ export function TopbarDesktopMenu({ isMenuOpen, handleProfileMenuOpen }) {
   const dispatch = useDispatch()
 
   const handleOpenNotificationDrawer = () => {
-    console.log("handleOpenNotification")
     dispatch(openNotificationDrawer())
   }
   const handleEvent = (event, item:MenuItemModel) => {
@@ -43,7 +42,6 @@ export function TopbarDesktopMenu({ isMenuOpen, handleProfileMenuOpen }) {
     else if (item.id === 'TM_NOTIFICATIONS'){
       handleOpenNotificationDrawer()
     }
-    console.log("event: ", event, item)
   }
 
   return (

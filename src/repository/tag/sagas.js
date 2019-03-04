@@ -33,9 +33,7 @@ function* makeApiRequest(payload){
 
 export default function* requestWatcherSaga() {
   while(true) {
-    console.log("Sagas TAG: Watching...")
     const payload = yield take(fetchData.TRIGGER)
-    console.log("Sagas TAG: Catched...")
 
     yield fork(makeApiRequest, payload)
   }

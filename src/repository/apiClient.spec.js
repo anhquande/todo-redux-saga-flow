@@ -10,7 +10,6 @@ describe('test API Call', () => {
   test('should request tags', async () => {
     const result = await apiClient(TagRepository.TAG.FIND_ALL.trigger())
 
-    console.log(result)
   })
 
 })

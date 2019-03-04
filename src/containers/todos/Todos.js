@@ -10,7 +10,6 @@ import { TodosFilter } from './TodosFilter'
 import { setPageHeader } from '../../actions/page'
 
 export function Todos() {
-  console.log("[AppMain].render()")
 
   const store = useContext(StoreContext)
   const todos = useTodos()
@@ -18,8 +17,6 @@ export function Todos() {
 
   const dispatch = useDispatch()
 
-  console.log("AppMain.store= ",store)
-  console.log("AppMain.store.state= ",store.getState())
   const [visibleTodos, setVisibleTodos] = useState([])
 
   useEffect(()=>{
@@ -29,7 +26,6 @@ export function Todos() {
   })
 
   useEffect(()=>{
-    console.log("useEffect")
     setVisibleTodos(doFilter(todos,visibilityFilter))
   },[todos,visibilityFilter])
 
@@ -39,7 +35,6 @@ export function Todos() {
       note
     }
 
-    console.log("[handleSubmit] Content :", content)
     dispatch(createTodo(content))
   }
 

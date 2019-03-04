@@ -10,8 +10,6 @@ import type { Store } from '../types'
 export const history = createBrowserHistory()
 
 export default function configureStore(preloadedState):Store{
-  console.log('configure store with preloadedState: ',preloadedState)
-
   const sagaMiddleware = createSagaMiddleware()
   const store = createStore(
     createRootReducer(history), // root reducer with router state

@@ -4,12 +4,10 @@ import { getIn } from '../../utils/objectUtils'
 
 // Select entities from state
 export const getTagIds = state => {
-  console.log("getTagIds: state= ", state)
   return getIn(state, ["result",0])
 }
 
 export const getTags = state => {
-  console.log("getTags: state= ", state)
   return getIn(state, ["entities", "tags"])
 }
 // Select filter from state
@@ -18,7 +16,6 @@ export const getFilter = state => {
 }
 export const getTagsResult = state => {
   const result = getIn(state, ["result",0])
-  console.log("tagResult: getTagsResult= ", result)
 
   return result
 }
@@ -44,7 +41,6 @@ const doFilterUnusedTags = (tagResult, tags: Tags) => {
 }
 
 export const doFilter = (tagResult, tags: Tags, filter: TagsFilter) => {
-  console.log("selectTags.doFilter: ", tagResult, tags, filter)
   switch (filter) {
     case 'SHOW_IN_USE':
       return doFilterUsedTags(tagResult, tags)

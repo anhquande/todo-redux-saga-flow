@@ -25,11 +25,8 @@ const tagsState = (state: Tags = initList, action: TagsAction): TagsState => {
   switch (action.type) {
 
     case TagRepository.TAG.FIND_ALL.SUCCESS:
-      console.log("new tags: ", action.payload)
-      console.log("oldState (before mergeDeep): ", state)
       const {payload} = action
       const newState = {...state, ...payload}
-      console.log("newState (after mergeDeep): ", newState)
 
       return newState
 

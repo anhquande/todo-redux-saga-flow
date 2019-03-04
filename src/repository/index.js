@@ -4,4 +4,3 @@ export const Repositories = {
   ...TagRepository
 }
 
-console.log("Repositories: ", Repositories)

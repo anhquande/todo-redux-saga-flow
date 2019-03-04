@@ -26,7 +26,6 @@ const notificationDrawerReducer = (state: NotificationDrawerState = initState, a
         notificationDrawerOpen: !state.notificationDrawerOpen,
       }
     case 'SHOW_NOTIFICATION_DRAWER':
-      console.log("SHOW_NOTIFICATION_DRAWER")
       return {
         ...state,
         notificationDrawerOpen: true,

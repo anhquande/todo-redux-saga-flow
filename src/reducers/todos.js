@@ -16,12 +16,10 @@ const createTodo = (id: ID, title: string, note: string): TodoItem => {
     updatedOn: new Date()
   }
 
-  console.log('newTodoItem is created: ', newTodo)
   return Object.assign({}, newTodo)
 }
 
 const changeTodoStatus = (todos: TodoList, id: ID, status: TodoStatus): TodoList =>{
-  console.log("reducer.changeTodoStatus: id=",id, status)
   return   todos.map(t => (t.id !== id ? t : { ...t, status }))
 }
 

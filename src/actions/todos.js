@@ -3,7 +3,6 @@
 import type { ID, TodoContent, TodoStatus, TodosAction } from '../types/todos'
 
 export const createTodo = (content: TodoContent): TodosAction => {
-  console.log("actions.createTodo: ", content)
   return {
     type: 'TODO_CREATE',
     note: content.note,
@@ -13,7 +12,6 @@ export const createTodo = (content: TodoContent): TodosAction => {
 }
 
 export const updateTodoStatus = (id: ID, status: TodoStatus): TodosAction => {
-  console.log("actions.updateTodoStatus: id=", id)
   return {
     type: 'TODO_UPDATE_STATUS',
     id,
@@ -22,7 +20,6 @@ export const updateTodoStatus = (id: ID, status: TodoStatus): TodosAction => {
 }
 
 export const deleteTodo = (id: ID): TodosAction => {
-  console.log("actions.deleteTodo: id=", id)
   return {
     type: 'TODO_DELETE',
     id

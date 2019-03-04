@@ -8,7 +8,6 @@ const initState: LayoutState = {
 }
 
 const doToggleLayout = (currentState: LayoutState): DrawerState => {
-  console.log("[doToggleLayout] currentState = ", currentState)
   switch (currentState.drawerState) {
     case 'maximized':
       return currentState.responsiveMode === 'desktop' ? 'minimized' : 'closed'

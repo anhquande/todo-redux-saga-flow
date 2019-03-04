@@ -12,7 +12,6 @@ describe("ObjectUtils Testcase", ()=>{
       }
     }
     const product = getIn(obj, ["lineItem","product"])
-    console.log(product)
 
     const title = getIn(obj, ["lineItem","product", "title"])
     expect(title).toEqual("test")

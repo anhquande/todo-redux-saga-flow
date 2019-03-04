@@ -10,6 +10,7 @@ const styles = theme => {
       [theme.breakpoints.up('sm')]: {
         display: 'block',
       },
+      fontSize: theme.typography.h6.fontSize,
     },
   } // return
 } // styles

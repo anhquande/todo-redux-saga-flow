@@ -11,11 +11,9 @@ import { Prompt } from 'react-router'
 function useDirtyForm(onUnload, dirty){
 
   useEffect( ()=>{
-    console.log("addEventListener beforeunload...")
     window.removeEventListener('beforeunload',onUnload)
     window.addEventListener('beforeunload', onUnload)
     return ()=>{
-      console.log("removeEventListener beforeunload...")
       window.removeEventListener('beforeunload',onUnload)
     }
   },[dirty])
@@ -129,7 +127,6 @@ export function TodoForm({ handleSubmit }) {
   const initialValues = { title: "", note: "" }
 
   const onSubmit = async (values, {setSubmitting, setErrors, setStatus, resetForm}) => {
-    console.log("onSubmit: ",values)
     try {
       resetForm(initialValues)
       setStatus({success: true})
@@ -144,10 +141,8 @@ export function TodoForm({ handleSubmit }) {
   }
 
   function handleBlur(e:any) {
-    console.log("handleBlur: ",e)
   }
 
-  console.log("TODOFORM is rendered")
   return (
     <React.Fragment>
       <Formik
