@@ -215,7 +215,7 @@ const EnhancedTableToolbar = props => {
       <>
         {toolbarActions && toolbarActions
         .filter(a => a.canVisible && a.canVisible(numSelected))
-        .sort((a,b)=>a.renderOrder - b.renderOrder)
+        .sort((a, b) => a.renderOrder - b.renderOrder)
         .map(a => {
           return (
             <Tooltip title={a.label} key={a.key}>
@@ -290,6 +290,7 @@ function EnhancedTable({
                          showSearch = true,
                          handleSearch,
                          toolbarActions = [],
+                         toolbarVisible = false,
                          rowClass,
                        }) {
   const classes = useClasses(tableStyles)
@@ -367,11 +368,14 @@ function EnhancedTable({
   return (
     <div>
       {/* <Paper className={classes.root}> */}
-      <EnhancedTableToolbar numSelected={selected.length}
-                            tableHeader={tableHeader}
-                            toolbarActions={toolbarActions}
-                            handleSearch={handleSearch}
-                            showSearch={showSearch}/>
+      {toolbarVisible && (
+        <EnhancedTableToolbar numSelected={selected.length}
+                              tableHeader={tableHeader}
+                              toolbarActions={toolbarActions}
+                              handleSearch={handleSearch}
+                              showSearch={showSearch}/>
+      )}
+
       <div className={classes.tableWrapper}>
         <Table className={classes.table} aria-labelledby="tableTitle">
           <EnhancedTableHead
