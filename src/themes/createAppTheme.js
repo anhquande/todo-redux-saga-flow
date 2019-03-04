@@ -11,6 +11,7 @@ export default function createAppTheme(options: ThemeOptions) {
   const menuBgHover = blueGrey[800]
   const menuColorHover = green[50]
 
+  const textColor = '#546e7a'
   return createMuiTheme({
 
     typography: {
@@ -53,6 +54,24 @@ export default function createAppTheme(options: ThemeOptions) {
               color: '#ceeffb',
               backgroundColor: 'rgba(76,83,87,0.33)'
             }
+          }
+        },
+        table: {
+          rowSelected: {
+            color: textColor,
+            backgroundColor: '#d3e3ff',
+          },
+          rowOdd: {
+            color: textColor,
+            backgroundColor: '#fafafb',
+          },
+          rowEven: {
+            color: textColor,
+            backgroundColor: '#fff',
+          },
+          rowHighlight: {
+            color: textColor,
+            backgroundColor: '#d3e3ff',
           }
         }
       },

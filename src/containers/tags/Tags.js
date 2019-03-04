@@ -15,28 +15,23 @@ import { useClasses } from '../../hooks/useClasses'
 
 const styles = theme => ({
   rowSelected:
-    theme.palette.type === 'light'
-      ? {
-        color: theme.palette.secondary.main,
-        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-      }
-      : {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.secondary.dark,
-      },
+    {
+      color: theme.app.color.table.rowSelected.color,
+      backgroundColor: theme.app.color.table.rowSelected.backgroundColor,
+    },
   rowEven:
     {
-      color: theme.palette.secondary.main,
-      backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      color: theme.app.color.table.rowEven.color,
+      backgroundColor: theme.app.color.table.rowEven.backgroundColor,
     },
   rowOdd: {
-    color: theme.palette.secondary.main,
-    backgroundColor: lighten(theme.palette.primary.light, 0.85),
+    color: theme.app.color.table.rowOdd.color,
+    backgroundColor: theme.app.color.table.rowOdd.backgroundColor,
   },
   rowHighlight:
     {
-      color: theme.palette.text.primary,
-      backgroundColor: theme.palette.primary.dark,
+      color: theme.app.color.table.rowHighlight.color,
+      backgroundColor: theme.app.color.table.rowHighlight.backgroundColor,
     },
   rowOnly:
     {
@@ -45,13 +40,11 @@ const styles = theme => ({
     },
   rowFirst:
     {
-      color: theme.palette.text.error,
-      backgroundColor: theme.palette.primary.dark,
+      borderTop: '1px solid #cacaca',
     },
   rowLast:
     {
-      color: theme.palette.text.primary,
-      backgroundColor: theme.palette.primary.dark,
+      borderBottom: '1px solid #cacaca',
     },
 
 })
@@ -99,7 +92,7 @@ export function Tags() {
   function handleSearch(searchTerm) {
   }
 
-  const rowClass = (row, rowIndex, isRowSelected, selectedRows, visibleRows, tableClasses) => {
+  const rowClassName = (row, rowIndex, isRowSelected, selectedRows, visibleRows, tableClasses) => {
 
     const isFirstRow = rowIndex === 0
     const isLastRow = rowIndex === (visibleRows ? visibleRows.length - 1 : 0)
@@ -111,12 +104,17 @@ export function Tags() {
       [classes.rowOnly]: isOnlyRow,
       [classes.rowEven]: isEvenRow,
       [classes.rowOdd]: isOddRow,
-      // [classes.rowSelected]: isRowSelected,
       [classes.rowLast]: isLastRow,
       [classes.rowFirst]: isFirstRow,
     })
 
     return className
+  }
+
+  const rowClasses = (row, rowIndex, isRowSelected, selectedRows, visibleRows, tableClasses) => {
+    return {
+      'selected': classes.rowSelected,
+    }
   }
 
   const columns = [
@@ -173,7 +171,8 @@ export function Tags() {
                            defaultOrderBy="usages"
                            defaultOrderDirection="asc"
                            selectionMode="multiple"
-                           rowClass={rowClass}
+                           rowClassName={rowClassName}
+                           rowClasses={rowClasses}
                            handleSearch={handleSearch}
                            toolbarActions={toolbarActions}
             />

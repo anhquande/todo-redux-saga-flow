@@ -44,14 +44,28 @@ function getSorting(order, orderBy) {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy)
 }
 
+const tableHeadStyles = theme => ({
+  tableHead: {
+    backgroundColor: '#e0e0e0',
+    borderBottom: '1px solid #cacaca'
+  },
+  columnHeader: {
+    fontSize: '1rem',
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: 'bold'
+  },
+})
+
 function EnhancedTableHead(props) {
   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, columns, selectionMode } = props
   const createSortHandler = property => event => {
     onRequestSort(event, property)
   }
 
+  const classes = useClasses(tableHeadStyles)
+
   return (
-    <TableHead>
+    <TableHead className={classes.tableHead}>
       <TableRow>
         {selectionMode !== 'none' && (
           <TableCell padding="checkbox" style={{ width: 52 }}>
@@ -81,6 +95,7 @@ function EnhancedTableHead(props) {
                     active={orderBy === col.field}
                     direction={order}
                     onClick={createSortHandler(col.field)}
+                    className={classes.columnHeader}
                   >
                     {col.label}
                   </TableSortLabel>
@@ -291,7 +306,8 @@ function EnhancedTable({
                          handleSearch,
                          toolbarActions = [],
                          toolbarVisible = false,
-                         rowClass,
+                         rowClassName,
+                         rowClasses,
                        }) {
   const classes = useClasses(tableStyles)
   const [order, setOrder] = React.useState(defaultOrderDirection)
@@ -400,12 +416,19 @@ function EnhancedTable({
                   tabIndex={-1}
                   key={row[idColumn]}
                   selected={isItemSelected}
-                  className={rowClass ? rowClass(row,
+                  className={rowClassName ? rowClassName(row,
                     rowIndex,
                     isItemSelected,
                     selected,
                     visibleRows,
                     classes) : ''}
+                  classes={rowClasses ? rowClasses(row,
+                      rowIndex,
+                      isItemSelected,
+                      selected,
+                      visibleRows,
+                      classes) : {}
+                  }
                 >
                   {selectionMode !== 'none' && (
                     <TableCell padding="checkbox" role="checkbox" key="checkbox">
