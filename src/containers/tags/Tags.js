@@ -158,7 +158,7 @@ export function Tags() {
       console.log("add actions ")
 
       dispatch(addSecondTopbarAction(
-        createTextMenuItem("TA_DELETE_TAGS",'Delete tags', 'delete', '', {badgeVisible:true, badge:newSelectedRows.length})
+        createTextMenuItem("TA_DELETE_TAGS",`Delete`, 'delete', '', {badgeVisible:true, badge:newSelectedRows.length})
       ))
     }
     else{
