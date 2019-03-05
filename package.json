@@ -2,6 +2,25 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "description": "Tool for validating credit cards.",
+  "keywords": [
+    "react",
+    "redux",
+    "saga",
+    "flow",
+    "starter admin project"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anhquande/todo-redux-saga-flow.git"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Anh Quan Nguyen",
+    "email": "info@anhquan.de",
+    "url": "https://github.com/anhquande"
+  },
+  "homepage": "https://github.com/anhquande/todo-redux-saga-flow",
   "dependencies": {
     "@material-ui/core": "^4.0.0-alpha.1",
     "@material-ui/icons": "^4.0.0-alpha.1",
