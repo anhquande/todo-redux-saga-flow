@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'redux-react-hook'
 import { useTranslation } from 'react-i18next'
-import { lighten } from '@material-ui/core/styles/colorManipulator'
 import classNames from 'classnames'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import DeleteIcon from '@material-ui/icons/Delete'
+import Fab from '@material-ui/core/Fab'
+import AddIcon from '@material-ui/icons/Add'
 import { useTags } from '../../hooks/useReducer'
 import { setPageHeader } from '../../actions/page'
 import type { TagsState } from '../../repository/tag/types'
@@ -12,6 +13,7 @@ import { getTagIds, getVisibleTags } from '../../repository/tag/selectors'
 import { TagRepository } from '../../repository/tag/repository'
 import EnhancedTable from '../../components/EnhancedTable'
 import { useClasses } from '../../hooks/useClasses'
+import { FloatingActionButtonAdd } from '../../components/fab'
 
 const styles = theme => ({
   rowSelected:
@@ -161,11 +163,12 @@ export function Tags() {
 
   return (
     <>
-      <div>
+      <div style={{marginBottom: 80}}>
         {loading ? (
           <div>Loading...</div>
         ) : (
           <div>
+
             <EnhancedTable data={visibleTags}
                            columns={columns}
                            defaultOrderBy="usages"
@@ -176,6 +179,9 @@ export function Tags() {
                            handleSearch={handleSearch}
                            toolbarActions={toolbarActions}
             />
+
+            <FloatingActionButtonAdd/>
+
           </div>
         )}
 

@@ -1,35 +1,48 @@
 import React from 'react'
 import List from '@material-ui/core/List'
+import classNames from 'classnames'
 import { useSidebarMenuState } from '../../hooks/useReducer'
 import { ListItemLink } from '../../components/ListItemLink'
 import { useClasses } from '../../hooks/useClasses'
 
+
 const styles = theme => {
   return {
     menuSectionHeader: {
-      fontSize:'0.9rem',
-      fontFamily:theme.typography.fontFamily,
-      color:theme.app.color.menu.section.header.color,
-      backgroundColor:theme.app.color.menu.section.header.backgroundColor,
-      marginTop:theme.spacing(2),
-      marginBottom:0,
-      paddingTop:theme.spacing(1),
-      paddingBottom:theme.spacing(1),
-      paddingLeft:theme.spacing(2),
-      paddingRight:theme.spacing(1),
+      fontSize: '0.9rem',
+      fontFamily: theme.typography.fontFamily,
+      color: theme.app.color.menu.section.header.color,
+      backgroundColor: theme.app.color.menu.section.header.backgroundColor,
+      marginTop: theme.spacing(2),
+      marginBottom: 0,
+      paddingTop: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(1),
+    },
+    menuSectionHeaderOpen: {
+      display: 'inherit',
+    },
+    menuSectionHeaderClose: {
+      display: 'none',
     }
   }
 }
+
 export function SidebarMenu() {
 
-  const { sidebarMenu } = useSidebarMenuState()
+  const { sidebarMenu, sidebarMenuOpen } = useSidebarMenuState()
 
   const classes = useClasses(styles)
 
   function renderSection(section) {
     return (
       <section key={section.id}>
-        <div className={classes.menuSectionHeader}>{section.header}</div>
+        <div className={classNames(classes.menuSectionHeader,
+          {
+            [classes.menuSectionHeaderOpen]: sidebarMenuOpen,
+            [classes.menuSectionHeaderClose]: !sidebarMenuOpen
+          })}>{section.header}</div>
 
         <List>
           {section.menuItems
