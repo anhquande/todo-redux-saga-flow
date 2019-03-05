@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography'
 import Checkbox from '@material-ui/core/Checkbox'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
-import DeleteIcon from '@material-ui/icons/Delete'
 import SearchIcon from '@material-ui/icons/Search'
 import { fade, lighten } from '@material-ui/core/styles/colorManipulator'
 import InputBase from '@material-ui/core/InputBase'
@@ -306,13 +305,14 @@ function EnhancedTable({
                          handleSearch,
                          toolbarActions = [],
                          toolbarVisible = false,
+                         selectedRowsChangeHandler = null,
                          rowClassName,
                          rowClasses,
                        }) {
   const classes = useClasses(tableStyles)
   const [order, setOrder] = React.useState(defaultOrderDirection)
   const [orderBy, setOrderBy] = React.useState(defaultOrderBy)
-  const [selected, setSelected] = React.useState(defaultSelected)
+  const [selectedRows, setSelectedRows] = React.useState(defaultSelected)
   const [page, setPage] = React.useState(defaultPage)
   const [rowsPerPage, setRowsPerPage] = React.useState(defaultRowsPerPage)
 
@@ -322,13 +322,21 @@ function EnhancedTable({
     setOrderBy(property)
   }
 
+  function updateSelectedRows(newSelectedRows) {
+    const oldSelectedRows = [...selectedRows]
+    setSelectedRows(newSelectedRows)
+    if (selectedRowsChangeHandler){
+      selectedRowsChangeHandler(oldSelectedRows, newSelectedRows)
+    }
+  }
+
   function handleSelectAllClick(event) {
     if (event.target.checked) {
       const newSelecteds = data.map(n => n[idColumn])
-      setSelected(newSelecteds)
+      updateSelectedRows(newSelecteds)
       return
     }
-    setSelected([])
+    updateSelectedRows([])
   }
 
   function handleClick(event, id) {
@@ -337,23 +345,23 @@ function EnhancedTable({
       event.preventDefault()
       return
     }
-    const selectedIndex = selected.indexOf(id)
-    let newSelected = []
+    const selectedIndex = selectedRows.indexOf(id)
+    let newSelectedRows = []
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id)
+      newSelectedRows = newSelectedRows.concat(selectedRows, id)
     } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1))
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1))
+      newSelectedRows = newSelectedRows.concat(selectedRows.slice(1))
+    } else if (selectedIndex === selectedRows.length - 1) {
+      newSelectedRows = newSelectedRows.concat(selectedRows.slice(0, -1))
     } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+      newSelectedRows = newSelectedRows.concat(
+        selectedRows.slice(0, selectedIndex),
+        selectedRows.slice(selectedIndex + 1),
       )
     }
 
-    setSelected(newSelected)
+    updateSelectedRows(newSelectedRows)
   }
 
   function handleChangePage(event, newPage) {
@@ -364,7 +372,7 @@ function EnhancedTable({
     setRowsPerPage(event.target.value)
   }
 
-  const isSelected = id => selected.indexOf(id) !== -1
+  const isSelected = id => selectedRows.indexOf(id) !== -1
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
@@ -385,7 +393,7 @@ function EnhancedTable({
     <div>
       {/* <Paper className={classes.root}> */}
       {toolbarVisible && (
-        <EnhancedTableToolbar numSelected={selected.length}
+        <EnhancedTableToolbar numSelected={selectedRows.length}
                               tableHeader={tableHeader}
                               toolbarActions={toolbarActions}
                               handleSearch={handleSearch}
@@ -395,7 +403,7 @@ function EnhancedTable({
       <div className={classes.tableWrapper}>
         <Table className={classes.table} aria-labelledby="tableTitle">
           <EnhancedTableHead
-            numSelected={selected.length}
+            numSelected={selectedRows.length}
             order={order}
             orderBy={orderBy}
             onSelectAllClick={handleSelectAllClick}
@@ -419,15 +427,15 @@ function EnhancedTable({
                   className={rowClassName ? rowClassName(row,
                     rowIndex,
                     isItemSelected,
-                    selected,
+                    selectedRows,
                     visibleRows,
                     classes) : ''}
                   classes={rowClasses ? rowClasses(row,
-                      rowIndex,
-                      isItemSelected,
-                      selected,
-                      visibleRows,
-                      classes) : {}
+                    rowIndex,
+                    isItemSelected,
+                    selectedRows,
+                    visibleRows,
+                    classes) : {}
                   }
                 >
                   {selectionMode !== 'none' && (

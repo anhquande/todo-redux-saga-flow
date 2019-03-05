@@ -9,6 +9,8 @@ import ImprintIcon from '@material-ui/icons/ImportContacts'
 import TodosIcon from '@material-ui/icons/ListAltOutlined'
 import TagsIcon from '@material-ui/icons/Label'
 import LogoutIcon from '@material-ui/icons/PowerSettingsNew'
+import DeleteIcon from '@material-ui/icons/Delete'
+import SaveIcon from '@material-ui/icons/Save'
 
 export function Icon({name,...options}) {
   if (name === 'todos') return (<TodosIcon {...options}/>)
@@ -20,7 +22,9 @@ export function Icon({name,...options}) {
   if (name === 'accountCircle') return (<AccountCircleIcon {...options}/>)
   if (name === 'tags') return (<TagsIcon {...options}/>)
   if (name === 'logout') return (<LogoutIcon {...options}/>)
+  if (name === 'delete') return (<DeleteIcon {...options}/>)
+  if (name === 'save') return (<SaveIcon {...options}/>)
 
-  return (<MoreIcon {...options}/>)
+  return null
 
 }

@@ -40,7 +40,7 @@ export function createMenuSection(id, header, menuItems, { ...params }): MenuSec
   }
 }
 
-export function createTextMenuItem(id, title, icon, to): MenuItemModel {
+export function createTextMenuItem(id, title, icon, to, { ...params }): MenuItemModel {
   return {
     id,
     title,
@@ -55,6 +55,7 @@ export function createTextMenuItem(id, title, icon, to): MenuItemModel {
     visibleOnDesktop: true,
     visibleOnMobile: true,
     event: null,
+    ...params
   }
 }
 

@@ -9,6 +9,7 @@ import pageState from './page'
 import sidebarMenuState from './sidebarMenu'
 import notificationDrawerState from './notificationDrawer'
 import topbarMenuState from './topbarMenu'
+import secondTopbarState from './secondTopbar'
 import tagsState from '../repository/tag/reducers'
 
 export default (history) => combineReducers({
@@ -21,6 +22,7 @@ export default (history) => combineReducers({
   tagsState,
   sidebarMenuState,
   topbarMenuState,
+  secondTopbarState,
   notificationDrawerState,
 })
 

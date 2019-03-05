@@ -71,3 +71,11 @@ export function useTopbarMenuState() {
     }, []),
   )
 }
+
+export function useSecondTopbarState() {
+  return useMappedState(
+    useCallback(state => {
+      return state.secondTopbarState
+    }, []),
+  )
+}

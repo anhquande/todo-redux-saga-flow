@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'redux-react-hook'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
-import FilterListIcon from '@material-ui/icons/FilterList'
-import DeleteIcon from '@material-ui/icons/Delete'
-import Fab from '@material-ui/core/Fab'
-import AddIcon from '@material-ui/icons/Add'
-import { useTags } from '../../hooks/useReducer'
+import { useSecondTopbarState, useTags } from '../../hooks/useReducer'
 import { setPageHeader } from '../../actions/page'
 import type { TagsState } from '../../repository/tag/types'
 import { getTagIds, getVisibleTags } from '../../repository/tag/selectors'
@@ -14,6 +10,12 @@ import { TagRepository } from '../../repository/tag/repository'
 import EnhancedTable from '../../components/EnhancedTable'
 import { useClasses } from '../../hooks/useClasses'
 import { FloatingActionButtonAdd } from '../../components/fab'
+import {
+  addSecondTopbarAction,
+  clearSecondTopbarActions,
+  setSecondTopbarHeader
+} from '../../types/secondTopbar'
+import { createIconOnlyMenuItem, createTextMenuItem } from '../../types/menu'
 
 const styles = theme => ({
   rowSelected:
@@ -76,6 +78,14 @@ export function Tags() {
   useEffect(() => {
     dispatch(TagRepository.TAG.FIND_ALL.trigger())
   }, [])
+
+  // init
+  useEffect(() => {
+    dispatch(setSecondTopbarHeader({header: "Tags", icon:"tags"}))
+    dispatch(clearSecondTopbarActions())
+  }, [])
+
+  const secondTopbarState = useSecondTopbarState()
 
   function handleSubmit(name) {
     // TODO: dispatch(createTag(name))
@@ -141,25 +151,22 @@ export function Tags() {
   const handleDelete = (e) => {
   }
 
-  const toolbarActions = [
+  function selectedRowsChangeHandler(oldSelectedRows, newSelectedRows ) {
+    console.log('selectedRowsChangeHandler : ', newSelectedRows)
+    const hasSelected = newSelectedRows && newSelectedRows.length>0
+    if (hasSelected) {
+      console.log("add actions ")
 
-    {
-      renderOrder: 1,
-      key: 'action_delete',
-      label: "Filter",
-      icon: <DeleteIcon/>,
-      onClick: handleDelete,
-      canVisible: (numSelected) => numSelected > 0
-    },
-    {
-      renderOrder: 2,
-      key: 'action_filter',
-      label: "Filter",
-      icon: <FilterListIcon/>,
-      onClick: handleFilter,
-      canVisible: () => true
-    },
-  ]
+      dispatch(addSecondTopbarAction(
+        createTextMenuItem("TA_DELETE_TAGS",'Delete tags', 'delete', '', {badgeVisible:true, badge:newSelectedRows.length})
+      ))
+    }
+    else{
+
+      console.log("clear actions ")
+      dispatch(clearSecondTopbarActions())
+    }
+  }
 
   return (
     <>
@@ -168,7 +175,6 @@ export function Tags() {
           <div>Loading...</div>
         ) : (
           <div>
-
             <EnhancedTable data={visibleTags}
                            columns={columns}
                            defaultOrderBy="usages"
@@ -177,11 +183,9 @@ export function Tags() {
                            rowClassName={rowClassName}
                            rowClasses={rowClasses}
                            handleSearch={handleSearch}
-                           toolbarActions={toolbarActions}
+                           selectedRowsChangeHandler={selectedRowsChangeHandler}
             />
-
             <FloatingActionButtonAdd/>
-
           </div>
         )}
 

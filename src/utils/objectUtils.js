@@ -25,5 +25,4 @@ export function getIn(entity: any, arr: Array<string>) {
 
 
   return node
-
 }

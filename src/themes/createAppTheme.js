@@ -37,6 +37,7 @@ export default function createAppTheme(options: ThemeOptions) {
     },
     app: {
       color: {
+        text:textColor,
         link: {
           normal: '#0091ea',
           sidebar: '#639aaf',
@@ -46,7 +47,8 @@ export default function createAppTheme(options: ThemeOptions) {
           backgroundColor: '#37474f',
         },
         secondTopBar: {
-          backgroundColor: '#eeeeee',
+          color:textColor,
+          backgroundColor: '#eeeeee'
         },
         menu: {
           section: {
