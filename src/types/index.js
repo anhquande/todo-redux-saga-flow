@@ -1,12 +1,12 @@
 // @flow
-import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux'
+import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux'
 
-import type { TodosState, TodosAction } from './todos'
-import type { VisibilityFilterState, VisibilityFilterAction } from './visibilityFilter'
-import type { LayoutState, LayoutAction } from './layout'
+import type { TodosAction, TodosState } from './todos'
+import type { VisibilityFilterAction, VisibilityFilterState } from './visibilityFilter'
+import type { LayoutAction, LayoutState } from './layout'
 import type { LocaleAction, LocaleState } from './locale'
 import type { PageAction, PageState } from './page'
-import type { TagsAction, TagsState } from './tags'
+import type { TagsAction, TagsState } from '../repository/tag/types'
 
 export type ReduxInitAction = { type: '@@INIT' };
 

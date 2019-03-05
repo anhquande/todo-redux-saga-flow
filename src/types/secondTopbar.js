@@ -6,7 +6,7 @@ import type { MenuModel } from './menu'
 export type SecondTopbarState = {
   +header: string,
   +icon: string,
-  +actions: MenuModel,
+  +menuItems: MenuModel,
 }
 
 export const clearSecondTopbarActions = createAction('CLEAR_SECOND_TOPBAR_ACTIONS')

@@ -3,7 +3,7 @@
 import type { LocaleState, LocaleAction } from '../types/locale'
 
 const initState: LocaleState = {
-  language: "en"
+  locale: "en"
 }
 
 const localeReducer = (state: LocaleState = initState, action: LocaleAction): LocaleState => {

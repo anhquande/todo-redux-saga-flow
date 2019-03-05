@@ -31,7 +31,7 @@ export const TagNativeForm = props => {
     setFieldTouched,
   } = props
 
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const changeField = (fieldName, e) => {
     e.persist()

@@ -1,5 +1,6 @@
 // @flow
 
+import { createAction } from 'redux-starter-kit'
 import type { PageAction } from '../types/page'
 
 export const setPageHeader = (pageHeader: string, tabHeader: string): PageAction => {

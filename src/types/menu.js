@@ -1,5 +1,9 @@
 // @flow
 
+export type MenuItemTarget = string
+
+export type Event = string
+
 export type MenuItemModel = {
   +id: string,
   +title: string,
@@ -9,7 +13,7 @@ export type MenuItemModel = {
   active: boolean,
   badge: number,
   badgeVisible: boolean,
-  to: string,
+  to: MenuItemTarget,
   visible: boolean,
   visibleOnDesktop: boolean,
   visibleOnMobile: boolean,
@@ -28,7 +32,7 @@ export type MenuSectionModel = {
 
 export type MenuSectionList = Array<MenuSectionModel>
 
-export function createMenuSection(id, header, menuItems, { ...params }): MenuSectionModel {
+export function createMenuSection(id:string, header:string, menuItems: MenuModel, { ...params }): MenuSectionModel {
   const headerVisible = header !== null || header !== undefined || header !== ''
   return {
     id,
@@ -40,7 +44,7 @@ export function createMenuSection(id, header, menuItems, { ...params }): MenuSec
   }
 }
 
-export function createTextMenuItem(id, title, icon, to, { ...params }): MenuItemModel {
+export function createTextMenuItem(id:string, title:string, icon:string, to:MenuItemTarget, { ...params }): MenuItemModel {
   return {
     id,
     title,
@@ -54,12 +58,12 @@ export function createTextMenuItem(id, title, icon, to, { ...params }): MenuItem
     visible: true,
     visibleOnDesktop: true,
     visibleOnMobile: true,
-    event: null,
+    event: "",
     ...params
   }
 }
 
-export function createIconOnlyMenuItem(id, tooltip, icon, to, { ...params }): MenuItemModel {
+export function createIconOnlyMenuItem(id:string, tooltip:string, icon:string, to:MenuItemTarget, { ...params }): MenuItemModel {
   return {
     id,
     title: '',
@@ -73,7 +77,7 @@ export function createIconOnlyMenuItem(id, tooltip, icon, to, { ...params }): Me
     visible: true,
     visibleOnDesktop: true,
     visibleOnMobile: true,
-    event: null,
+    event: "",
     ...params
   }
 }

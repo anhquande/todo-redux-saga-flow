@@ -1,4 +1,3 @@
-// @flow
 import { getVisibleTags } from './selectors'
 import type { TagsState } from './types'
 

@@ -14,24 +14,24 @@ const visibilityFilterSelector = (state: State) => {
 }
 
 
-export const doFilter = (todos: TodoList, visibilityFilter: VisibilityFilter) => {
+export const doFilter = (todos: TodoList, visibilityFilter: VisibilityFilter):TodoList => {
   switch (visibilityFilter) {
-    case 'SHOW_NEW':
-      return todos.filter(t => t.status === 'new')
+    case "SHOW_NEW":
+      return todos.filter(t => t.status === "new")
 
-    case 'SHOW_TODO':
-      return todos.filter(todo => todo.status === 'todo')
+    case "SHOW_TODO":
+      return todos.filter(todo => todo.status === "todo")
 
-    case 'SHOW_IN_PROGRESS':
-      return todos.filter(t => t.status === 'in progress')
+    case "SHOW_IN_PROGRESS":
+      return todos.filter(t => t.status === "in progress")
 
-    case 'SHOW_DONE':
-      return todos.filter(t => t.status === 'done')
+    case "SHOW_DONE":
+      return todos.filter(t => t.status === "done")
 
-    case 'SHOW_APPROVED':
-      return todos.filter(t => t.status === 'approved')
+    case "SHOW_APPROVED":
+      return todos.filter(t => t.status === "approved")
 
-    case 'SHOW_ALL':
+    case "SHOW_ALL":
     default:
       return todos
   }

@@ -10,6 +10,6 @@ export const setVisibilityFilter = (
 ): VisibilityFilterAction => {
   return {
     type: 'SET_VISIBILITY_FILTER',
-    filter
+    payload:{filter},
   }
 }

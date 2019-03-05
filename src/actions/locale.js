@@ -1,8 +1,8 @@
 // @flow
 
-import type { LocaleAction } from '../types/locale'
+import type { Locale, LocaleAction } from '../types/locale'
 
-export const changeLocale = (locale): LocaleAction => {
+export const changeLocale = (locale:Locale): LocaleAction => {
   return {
     type: 'CHANGE_LOCALE',
     locale

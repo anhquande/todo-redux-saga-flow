@@ -4,7 +4,7 @@ export type ID = number
 
 export type TodoContent = {
   +title: string,
-  note: string
+  note?: string
 }
 
 export type TodoStatus = "new" | "todo" | "in progress" | "done" | "approved"
@@ -24,8 +24,8 @@ export type TodosState = {
 }
 
 export type TodosAction =
-  | {type: "TODO_CREATE", +id: ID, +title: string, note?: string}
-  | {type: "TODO_UPDATE_STATUS", +id: ID, +newStatus:TodoStatus}
-  | {type: "TODO_DELETE", +id:ID}
+  | {type: "TODO_CREATE", payload:{+id: ID, +title: string, note?: string}}
+  | {type: "TODO_UPDATE_STATUS", payload:{+id: ID, +status:TodoStatus}}
+  | {type: "TODO_DELETE", payload:{+id:ID}}
   | {type: "TODO_READ_MANY"}
-  | {type: "TODO_READ_ONE", +id:ID}
+  | {type: "TODO_READ_ONE", payload:{+id:ID}}

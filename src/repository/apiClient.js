@@ -2,6 +2,7 @@
 import { normalize, schema } from 'normalizr'
 import { camelizeKeys } from 'humps'
 import { TagRepository } from './tag/repository'
+import type { Action } from '../types'
 
 export const HTTP_METHOD = {
   POST: "post",
@@ -46,7 +47,7 @@ const tagSchema = new schema.Entity('tags', {
 })
 const tagArraySchema = new schema.Array( new schema.Array(tagSchema))
 
-export function apiClient(action) {
+export function apiClient(action:Action) {
 
   switch (action.type) {
     case TagRepository.TAG.FIND_ALL.TRIGGER:

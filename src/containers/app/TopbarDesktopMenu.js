@@ -22,7 +22,7 @@ const styles = theme => {
   } // return
 } // styles
 
-export function TopbarDesktopMenu({ isMenuOpen, handleProfileMenuOpen }) {
+export function TopbarDesktopMenu({ isMenuOpen, handleProfileMenuOpen }: {isMenuOpen:boolean, handleProfileMenuOpen:Function}) {
   const classes = useClasses(styles)
 
   const { topbarMenu } = useTopbarMenuState()

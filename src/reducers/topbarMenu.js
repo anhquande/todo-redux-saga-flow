@@ -13,7 +13,7 @@ const initState: TopbarMenuState = {
 
 const topbarMenuReducer = (state: TopbarMenuState = initState, action: TopbarMenuAction): TopbarMenuState => {
   switch (action.type) {
-    case 'SET_SIDEBAR_MENU':
+    case "SET_TOPBAR_MENU":
       return {
         ...state,
         topbarMenu: action.payload,

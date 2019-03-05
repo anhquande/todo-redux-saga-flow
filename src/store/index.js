@@ -16,7 +16,7 @@ const persistConfig = {
   blacklist: ['auth']
 }
 
-export default function configureStore(preloadedState):Store{
+export default function configureStore(preloadedState:any):Store{
   const sagaMiddleware = createSagaMiddleware()
   const rootReducer = createRootReducer(history)
   const persistedReducer = persistReducer(persistConfig, rootReducer)

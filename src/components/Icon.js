@@ -12,18 +12,18 @@ import LogoutIcon from '@material-ui/icons/PowerSettingsNew'
 import DeleteIcon from '@material-ui/icons/Delete'
 import SaveIcon from '@material-ui/icons/Save'
 
-export function Icon({name,...options}) {
-  if (name === 'todos') return (<TodosIcon {...options}/>)
-  if (name === 'help') return (<HelpIcon {...options}/>)
-  if (name === 'imprint') return (<ImprintIcon {...options}/>)
-  if (name === 'search') return (<SearchIcon {...options}/>)
-  if (name === 'more') return (<MoreIcon {...options}/>)
-  if (name === 'notifications') return (<NotificationsIcon {...options}/>)
-  if (name === 'accountCircle') return (<AccountCircleIcon {...options}/>)
-  if (name === 'tags') return (<TagsIcon {...options}/>)
-  if (name === 'logout') return (<LogoutIcon {...options}/>)
-  if (name === 'delete') return (<DeleteIcon {...options}/>)
-  if (name === 'save') return (<SaveIcon {...options}/>)
+export function Icon({name="",...options}:{name:string,options?:Array<any>}) {
+  if (name === "todos") return (<TodosIcon {...options}/>)
+  if (name === "help") return (<HelpIcon {...options}/>)
+  if (name === "imprint") return (<ImprintIcon {...options}/>)
+  if (name === "search") return (<SearchIcon {...options}/>)
+  if (name === "more") return (<MoreIcon {...options}/>)
+  if (name === "notifications") return (<NotificationsIcon {...options}/>)
+  if (name === "accountCircle") return (<AccountCircleIcon {...options}/>)
+  if (name === "tags") return (<TagsIcon {...options}/>)
+  if (name === "logout") return (<LogoutIcon {...options}/>)
+  if (name === "delete") return (<DeleteIcon {...options}/>)
+  if (name === "save") return (<SaveIcon {...options}/>)
 
   return null
 

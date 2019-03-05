@@ -1,4 +1,3 @@
-// @flow
 import { apiClient } from './apiClient'
 import { TagRepository } from './tag/repository'
 
