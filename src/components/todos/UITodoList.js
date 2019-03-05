@@ -2,8 +2,9 @@
 import React from 'react'
 import List from '@material-ui/core/List'
 import { UITodoItem } from './UITodoItem'
+import type { TodoList } from '../../types/todos'
 
-export function UITodoList({ items }) {
+export function UITodoList({ items }: {items:TodoList}) {
 
   function renderList() {
     return (

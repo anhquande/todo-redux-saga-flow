@@ -19,7 +19,7 @@ function useDirtyForm(onUnload, dirty){
   },[dirty])
 }
 
-export const TodoNativeForm = props => {
+export const TodoNativeForm = (props:{handleSubmit:Function,values:{title:string,note:string}, errors:{title:string, note:string}, touched:{title:string,note:string}, handleChange:Function, isValid:boolean, dirty:boolean, setFieldTouched:Function}) => {
   const {
     handleSubmit,
     values: { title, note },
@@ -123,7 +123,7 @@ const validationSchema = Yup.object({
 })
 
 
-export function TodoForm({ handleSubmit }) {
+export function TodoForm({ handleSubmit }: {handleSubmit:(title:string,note:string)=>void}) {
   const initialValues = { title: "", note: "" }
 
   const onSubmit = async (values, {setSubmitting, setErrors, setStatus, resetForm}) => {

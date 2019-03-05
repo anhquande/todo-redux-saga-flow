@@ -3,15 +3,15 @@
 import type { SidebarMenuAction, SidebarMenuState } from '../types/sidebarMenu'
 import { createMenuSection, createTextMenuItem } from '../types/menu'
 
-const sectionMain=createMenuSection('SEC_MAIN', "Main", [
-  createTextMenuItem('SM_TODOS','Todos', 'todos', '/todos'),
-  createTextMenuItem('SM_TAGS','Tags', 'tags', '/tags'),
-  createTextMenuItem('SM_HELP','Help', 'help', '/help'),
+const sectionMain=createMenuSection("SEC_MAIN", "Main", [
+  createTextMenuItem("SM_TODOS","Todos", "todos", "/todos", {}),
+  createTextMenuItem("SM_TAGS","Tags", "tags", "/tags", {}),
+  createTextMenuItem("SM_HELP","Help", "help", "/help", {}),
 ])
-const sectionHelp=createMenuSection('SEC_HELP', "Support", [
-  createTextMenuItem('SM_HELP','Help', 'help', 'http://help.me.please.com'),
-  createTextMenuItem('SM_FEEDBACK','Feedback', 'tags', '/feedback'),
-  createTextMenuItem('SM_IMPRINT','Imprint', 'imprint', '/imprint'),
+const sectionHelp=createMenuSection("SEC_HELP", "Support", [
+  createTextMenuItem("SM_HELP","Help", "help", "http://help.me.please.com", {}),
+  createTextMenuItem("SM_FEEDBACK","Feedback", "tags", "/feedback", {}),
+  createTextMenuItem("SM_IMPRINT","Imprint", "imprint", "/imprint", {}),
 ])
 
 const initState: SidebarMenuState = {

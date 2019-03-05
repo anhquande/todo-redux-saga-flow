@@ -23,8 +23,8 @@ export type MenuItemModel = {
 export type MenuModel = Array<MenuItemModel>
 
 export type MenuSectionModel = {
-  id:string,
-  visible:boolean,
+  id: string,
+  visible: boolean,
   header: string,
   headerVisible: boolean,
   menuItems: MenuModel,
@@ -32,19 +32,28 @@ export type MenuSectionModel = {
 
 export type MenuSectionList = Array<MenuSectionModel>
 
-export function createMenuSection(id:string, header:string, menuItems: MenuModel, { ...params }): MenuSectionModel {
+export function createMenuSection(id: string, header: string, menuItems: MenuModel): MenuSectionModel {
   const headerVisible = header !== null || header !== undefined || header !== ''
   return {
     id,
-    visible:true,
+    visible: true,
     header,
     headerVisible,
     menuItems,
-    ...params
   }
 }
 
-export function createTextMenuItem(id:string, title:string, icon:string, to:MenuItemTarget, { ...params }): MenuItemModel {
+export function createTextMenuItem(
+  id: string,
+  title: string,
+  icon: string,
+  to: MenuItemTarget,
+  { ...params }: {
+    params?: {
+      badgeVisible?: boolean,
+      badge?: number,
+    }
+  }): MenuItemModel {
   return {
     id,
     title,
@@ -63,7 +72,13 @@ export function createTextMenuItem(id:string, title:string, icon:string, to:Menu
   }
 }
 
-export function createIconOnlyMenuItem(id:string, tooltip:string, icon:string, to:MenuItemTarget, { ...params }): MenuItemModel {
+export function createIconOnlyMenuItem(id: string, tooltip: string, icon: string, to: MenuItemTarget, { ...params }: {
+                                         params?: {
+                                           badgeVisible?: boolean,
+                                           badge?: number,
+                                         }
+                                       }
+): MenuItemModel {
   return {
     id,
     title: '',
