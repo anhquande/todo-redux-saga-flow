@@ -13,6 +13,7 @@ import './i18n'
 import { App } from './containers/app/index'
 import rootSaga from './sagas'
 import 'typeface-roboto'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const themeOptions = {
   palette: {
@@ -23,17 +24,20 @@ const themeOptions = {
 
 const theme = createAppTheme(themeOptions)
 
-const store = configureStore()
+const { store, persistor } = configureStore()
 store.runSaga(rootSaga)
 
 ReactDOM.render(
   <StoreContext.Provider value={store}>
     <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <ThemeProvider theme={theme}>
-          <App/>
-        </ThemeProvider>
-      </ConnectedRouter>
+      <PersistGate loading={null} persistor={persistor}>
+
+        <ConnectedRouter history={history}>
+          <ThemeProvider theme={theme}>
+            <App/>
+          </ThemeProvider>
+        </ConnectedRouter>
+      </PersistGate>
     </Provider>
   </StoreContext.Provider>
   ,

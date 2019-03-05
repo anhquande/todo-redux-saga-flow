@@ -4,15 +4,24 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import { routerMiddleware } from 'connected-react-router'
 import createSagaMiddleware, { END }  from 'redux-saga'
 import logger from 'redux-logger'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
 import createRootReducer from '../reducers'
 import type { Store } from '../types'
 
 export const history = createBrowserHistory()
+const persistConfig = {
+  key: 'root',
+  storage,
+}
 
 export default function configureStore(preloadedState):Store{
   const sagaMiddleware = createSagaMiddleware()
+  const rootReducer = createRootReducer(history)
+  const persistedReducer = persistReducer(persistConfig, rootReducer)
+
   const store = createStore(
-    createRootReducer(history), // root reducer with router state
+    persistedReducer, // root reducer with router state
     preloadedState,
     compose(
       applyMiddleware(
@@ -26,9 +35,11 @@ export default function configureStore(preloadedState):Store{
     ),
   )
 
+  const persistor = persistStore(store)
+
   store.runSaga = sagaMiddleware.run
   store.close = () => store.dispatch(END)
 
 
-  return store
+  return { store, persistor }
 }
