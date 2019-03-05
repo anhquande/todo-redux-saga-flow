@@ -68,14 +68,16 @@ export function AppSecondTopbar() {
                     onClick={(event) => handleEvent(event, item)}
             >
               <Icon name={item.icon}/>
-              {item.title}
-              {item.badgeVisible && (
+              {item.badgeVisible ? (
 
                 <Badge badgeContent={item.badge}
                        color="secondary"
                        max={99}
                        classes={{ badge: classes.badge }}>
+                  {item.title}
                 </Badge>
+              ) : (
+                <span>{item.title}</span>
               )}
 
             </Button>
