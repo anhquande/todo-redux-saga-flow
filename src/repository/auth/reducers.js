@@ -3,11 +3,14 @@
 
 import { createReducer } from 'redux-starter-kit'
 import type { AuthState } from './types'
+import { Anonymous } from './types'
 import { LogInRoutine, LogOutRoutine } from './routines'
+import { getIn } from '../../utils/objectUtils'
 
 const initState: AuthState = {
   authenticated: false,
   grantedAuthorities: ['ROLE_ADMIN', 'ROLE_GUESS'],
+  user:Anonymous,
   sessionId: "",
   token: "",
   loading: false,
@@ -17,6 +20,7 @@ const initState: AuthState = {
 export const auth = createReducer(initState, {
   [LogInRoutine.TRIGGER]: (state, action) => {
     state.authenticated = false
+    state.user = Anonymous
     state.grantedAuthorities = []
     state.sessionId = ""
     state.token = ""
@@ -26,9 +30,9 @@ export const auth = createReducer(initState, {
   [LogInRoutine.REQUEST]: (state, action) => {
   },
   [LogInRoutine.SUCCESS]: (state, action) => {
-    console.log("LOGIN SUCCESS: ", action)
     state.authenticated = true
-    state.grantedAuthorities = action.payload.grantedAuthorities
+    state.grantedAuthorities = getIn(action,["payload","user","roles"])
+    state.user = getIn(action,["payload","user"])
     state.sessionId = action.payload.sessionId
     state.token = action.payload.token
   },

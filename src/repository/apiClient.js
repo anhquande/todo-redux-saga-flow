@@ -55,7 +55,6 @@ const tagArraySchema = new schema.Array( new schema.Array(tagSchema))
 
 function buildRequestBody(params){
   const json =  JSON.stringify(params)
-  console.log("BuildRequestBody: json = ",json)
   return json
 }
 export function apiClient(action:Action) {

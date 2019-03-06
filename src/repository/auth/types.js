@@ -16,8 +16,17 @@ export type GrantedAuthority =
   | "ROLE_MANAGE_TODO"
 
 export type GrantedAuthorities = Array<GrantedAuthority>
+
+export type AuthUser = {
+  username:string,
+  email:string,
+  id:string,
+  roles:GrantedAuthorities
+}
+
 export type AuthState = {
   +authenticated: boolean,
+  +user:AuthUser,
   +grantedAuthorities: GrantedAuthorities,
   +sessionId: string,
   +token: string,
@@ -25,6 +34,7 @@ export type AuthState = {
   error: string,
 }
 
+export const Anonymous:AuthUser = {username:"",id:"",email:"",roles:[]}
 
 
 

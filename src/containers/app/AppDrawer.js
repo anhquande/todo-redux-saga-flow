@@ -7,7 +7,7 @@ import Link from '@material-ui/core/Link'
 
 import Avatar from '@material-ui/core/Avatar' // Import using relative path
 import { SidebarMenu } from './SidebarMenu'
-import { useSidebarMenuState } from '../../hooks/useReducer'
+import { useAuth, useSidebarMenuState } from '../../hooks/useReducer'
 import { useClasses } from '../../hooks/useClasses'
 import Logo from '../../static/images/logo.png' // Import using relative path
 import LogoSmall from '../../static/images/logo-small.png'
@@ -122,10 +122,11 @@ const styles = theme => {
 export function AppDrawer() {
 
   const classes = useClasses(styles)
-
+  const {user} = useAuth()
   const { sidebarMenuOpen } = useSidebarMenuState()
   const LogOutLink = props => <RouterLink to="/logout" {...props}/>
   const MyAccountLink = props => <RouterLink to="/myaccount" {...props}/>
+
 
   return (
     <Drawer
@@ -182,7 +183,7 @@ export function AppDrawer() {
               <a href="/myaccount" title="Logout"
                  className={classNames(classes.link)}
               >
-                My Profile
+                {user.username}
               </a>
             </Grid>
             <Grid item>

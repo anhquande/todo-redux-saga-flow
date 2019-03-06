@@ -2,18 +2,18 @@
   "users": [
     {
       "id": 1,
-      "username": "joe",
-      "email": "joe@email.com",
-      "password": "joe",
+      "username": "john",
+      "email": "john@email.com",
+      "password": "john",
       "roles": [
         "ROLE_SUPER_ADMIN"
       ]
     },
     {
       "id": 2,
-      "username": "leo",
-      "email": "leo@email.com",
-      "password": "leo",
+      "username": "leon",
+      "email": "leon@email.com",
+      "password": "leon",
       "roles": [
         "ROLE_ADMIN"
       ]
