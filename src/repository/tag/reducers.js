@@ -1,9 +1,11 @@
 // @flow
 
-import type { Tags, TagsAction, TagsState } from './types'
-import { TagRepository } from './repository'
+import { createReducer } from 'redux-starter-kit'
+import type { TagsState } from './types'
+import { TagRoutines } from './repository'
+import { createDefaultRepositoryReducers } from '../baseReducer'
 
-const initList: TagsState = {
+const initState: TagsState = {
   entities: {
     tags: [],
   },
@@ -13,33 +15,6 @@ const initList: TagsState = {
   loading: false,
 }
 
-const tagsState = (state: TagsState = initList, action: TagsAction): TagsState => {
-
-  if (action.type.endsWith("TRIGGER")) {
-    return { ...state, loading: true }
-  }
-  if (action.type.endsWith("FULFILL")) {
-    return { ...state, loading: false }
-  }
-
-  switch (action.type) {
-
-    case TagRepository.TAG.FIND_ALL.SUCCESS:
-      const { payload } = action
-      const newState = { ...state, ...payload }
-
-      return newState
-
-    case TagRepository.TAG.FIND_ALL.FAILURE:
-      return { ...state, error: action.payload }
-
-    case "TAG_FILTER":
-      return { ...state, filter: action.payload.filter }
-
-
-    default:
-      return state
-  }
-}
-
-export default tagsState
+export default createReducer(initState, {
+  ...createDefaultRepositoryReducers(TagRoutines),
+})

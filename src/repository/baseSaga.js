@@ -16,6 +16,7 @@ export function* fetchDataFromServer(routine, payload) {
       yield put(routine.success(response))
     }
   } catch (error) {
+    console.log("fetchDataFromServer.catch Error: ",error)
     yield put(routine.failure(error))
 
   } finally {
@@ -37,8 +38,8 @@ export function* watch(routine) {
 }
 
 export const watchRepository = (entityRepository) => {
-  const routines = RepositoryMethodArray.reduce( (acc, current) => {
-    acc.push(watch(entityRepository[current]))
+  const routines = RepositoryMethodArray.reduce( (acc, routine) => {
+    acc.push(watch(entityRepository[routine]))
     return acc
   }, [])
 

@@ -1,5 +1,5 @@
 import { apiClient } from './apiClient'
-import { TagRepository } from './tag/repository'
+import * as TagRoutines from './baseRepository'
 
 describe('test API Call', () => {
 
@@ -7,8 +7,8 @@ describe('test API Call', () => {
   })
 
   test('should request tags', async () => {
-    const result = await apiClient(TagRepository.TAG.FIND_ALL.trigger())
-
+    const result = await apiClient(TagRoutines.FIND_ALL.trigger())
+    console.log(result)
   })
 
 })

@@ -7,3 +7,5 @@ export const TAG: Entity = "TAG"
 export const TagRepository = {
   TAG : createRoutines(TAG)
 }
+
+export const TagRoutines = createRoutines(TAG)

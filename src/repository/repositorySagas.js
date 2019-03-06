@@ -1,6 +1,8 @@
-import tagWatcher from './tag/sagas'
+import tagWatchers from './tag/sagas'
+import authWatchers from './auth/sagas'
 
 export default [
-  tagWatcher(),
+  ...tagWatchers,
+  ...authWatchers
 ]
 

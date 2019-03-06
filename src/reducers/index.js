@@ -10,6 +10,7 @@ import notificationDrawerState from './notificationDrawer'
 import topbarMenuState from './topbarMenu'
 import secondTopbarState from './secondTopbar'
 import tagsState from '../repository/tag/reducers'
+import { auth } from '../repository/auth/reducers'
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -23,5 +24,6 @@ export default (history) => combineReducers({
   topbarMenuState,
   secondTopbarState,
   notificationDrawerState,
+  auth,
 })
 

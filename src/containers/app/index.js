@@ -2,11 +2,17 @@ import React from 'react'
 import JssProvider from 'react-jss/lib/JssProvider'
 import { create } from 'jss'
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles'
+import { Route, Switch } from 'react-router'
 import { useClasses } from '../../hooks/useClasses'
 import { AppDrawer } from './AppDrawer'
 import { AppMain } from './AppMain'
 import { AppTopbar } from './AppTopbar'
 import { NotificationDrawer } from './NotificationDrawer'
+import { AuthenticatedRoute } from '../../routes/AuthenticatedRoute'
+import { LoginPage } from '../login'
+import { NoMatch } from '../NoMatch'
+import { NonAuthenticatedRoute } from '../../routes/NonAuthenticatedRoute'
+import { publicRoutes } from '../../routes'
 
 // Change the css injection order so that our style can override the built-in css
 // How to do it?
@@ -26,29 +32,12 @@ const jss = create({
 })
 
 // end of css-injection-order
-const styles = theme => {
-  return {
-    root: {
-      display: 'flex',
-    },
-  } // return
-} // styles
 
 export function App() {
-  const classes = useClasses(styles)
 
   return (
     <JssProvider jss={jss} generateClassName={generateClassName}>
-
-      <div className={classes.root}>
-        <AppDrawer/>
-
-        <AppTopbar/>
-
-        <NotificationDrawer/>
-
-        <AppMain/>
-      </div>
+      {publicRoutes}
     </JssProvider>
   ) // return
 } // App

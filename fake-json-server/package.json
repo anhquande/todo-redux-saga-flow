@@ -9,6 +9,7 @@
     "fake": "json-server fakedb.js --watch ./schema --port 8080 --delay 200 --snapshots ./snapshots"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "chance": "^1.0.18",
     "faker": "^4.1.0",
     "json-schema-faker": "^0.5.0-rc16",

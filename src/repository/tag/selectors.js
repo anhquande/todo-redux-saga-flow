@@ -15,11 +15,8 @@ export const getFilter = state => {
   return state.filter
 }
 export const getTagsResult = state => {
-  const result = getIn(state, ["result",0])
-
-  return result
+  return getIn(state, ["result",0])
 }
-
 
 const doFilterUsedTags = (tagResult, tags: Tags) => {
   return tagResult.reduce((acc, id) => {

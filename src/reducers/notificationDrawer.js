@@ -6,10 +6,10 @@ import { createTextMenuItem } from "../types/menu"
 const initState: NotificationDrawerState = {
   notificationDrawerOpen: false,
   notifications: [
-    createTextMenuItem("SM_TODOS","Todos", "todos", "/todos", {}),
-    createTextMenuItem("SM_TAGS","Tags", "tags", "/tags", {}),
-    createTextMenuItem("SM_IMPRINT","Imprint", "imprint", "/imprint", {}),
-    createTextMenuItem("SM_HELP","Help", "help", "/help", {}),
+    createTextMenuItem("SM_TODOS","Todos", "todos", "/admin/todos", {}),
+    createTextMenuItem("SM_TAGS","Tags", "tags", "/admin/tags", {}),
+    createTextMenuItem("SM_IMPRINT","Imprint", "imprint", "/admin/imprint", {}),
+    createTextMenuItem("SM_HELP","Help", "help", "/admin/help", {}),
   ],
 }
 

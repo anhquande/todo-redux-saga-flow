@@ -6,7 +6,7 @@ import { useSecondTopbarState, useTags } from '../../hooks/useReducer'
 import { setPageHeader } from '../../actions/page'
 import type { TagsState } from '../../repository/tag/types'
 import { getTagIds, getVisibleTags } from '../../repository/tag/selectors'
-import { TagRepository } from '../../repository/tag/repository'
+import { TagRoutines } from '../../repository/tag/repository'
 import EnhancedTable from '../../components/EnhancedTable'
 import { useClasses } from '../../hooks/useClasses'
 import { FloatingActionButtonAdd } from '../../components/fab'
@@ -15,7 +15,7 @@ import {
   clearSecondTopbarActions,
   setSecondTopbarHeader
 } from '../../types/secondTopbar'
-import { createIconOnlyMenuItem, createTextMenuItem } from '../../types/menu'
+import { createTextMenuItem } from '../../types/menu'
 
 const styles = theme => ({
   rowSelected:
@@ -50,7 +50,6 @@ const styles = theme => ({
     {
       borderBottom: '1px solid #cacaca',
     },
-
 })
 
 export function Tags() {
@@ -76,7 +75,7 @@ export function Tags() {
   }, [allTagIds, visibleTags])
 
   useEffect(() => {
-    dispatch(TagRepository.TAG.FIND_ALL.trigger())
+    dispatch(TagRoutines.FIND_ALL.trigger())
   }, [])
 
   // init

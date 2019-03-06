@@ -1,5 +1,5 @@
 import React from 'react'
-import routes from '../../routes'
+import { secureRoutes } from '../../routes'
 import { useClasses } from '../../hooks/useClasses'
 
 const styles = theme => {
@@ -24,7 +24,7 @@ export function AppMain() {
   return (
     <main className={classes.content}>
       <div className={classes.toolbarPusher}/>
-      {routes}
+      {secureRoutes}
     </main>
   )
 }

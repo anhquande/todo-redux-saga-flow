@@ -1,14 +1,20 @@
 const fs = require('fs')
 const jsonServer = require('json-server')
 const jwt = require('jsonwebtoken')
+const bodyParser = require('body-parser')
 
 const server = jsonServer.create()
 const router = jsonServer.router('./database.json')
 const userdb = JSON.parse(fs.readFileSync('./auth/users.json', 'UTF-8'))
 
+// parse application/x-www-form-urlencoded
+server.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+server.use(bodyParser.json())
+
 server.use(jsonServer.defaults())
 server.use('/api', router)
-
 
 const SECRET_KEY = '123456789'
 
@@ -25,20 +31,27 @@ function verifyToken(token){
 }
 
 // Check if the user exists in database
-function isAuthenticated({email, password}){
-  return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1
+function isAuthenticated({username, password}){
+  return userdb.users.findIndex(user => user.username === username && user.password === password) !== -1
+}
+
+function findUserByUsername(username){
+  return userdb.users.find(user => (user.username === username))
 }
 
 server.post('/auth/login', (req, res) => {
-  const {email, password} = req.body
-  if (isAuthenticated({email, password}) === false) {
+
+  const {username, password} = req.body
+  console.log(`Authenticate ${username}, ${password}`)
+  if (isAuthenticated({username, password}) === false) {
     const status = 401
     const message = 'Incorrect email or password'
     res.status(status).json({status, message})
     return
   }
-  const accessToken = createToken({email, password})
-  res.status(200).json({accessToken})
+  const token = createToken({username, password})
+  const user = findUserByUsername(username)
+  res.status(200).json({token, user})
 })
 
 server.use(/^(?!\/auth).*$/,  (req, res, next) => {

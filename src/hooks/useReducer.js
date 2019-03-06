@@ -79,3 +79,11 @@ export function useSecondTopbarState() {
     }, []),
   )
 }
+
+export function useAuth() {
+  return useMappedState(
+    useCallback(state => {
+      return state.auth
+    }, []),
+  )
+}

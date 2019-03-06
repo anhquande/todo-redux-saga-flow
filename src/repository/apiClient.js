@@ -1,8 +1,9 @@
 // @flow
 import { normalize, schema } from 'normalizr'
 import { camelizeKeys } from 'humps'
-import { TagRepository } from './tag/repository'
+import { TagRoutines } from './tag/repository'
 import type { Action } from '../types'
+import { LogInRoutine } from './auth/routines'
 
 export const HTTP_METHOD = {
   POST: "post",
@@ -11,7 +12,7 @@ export const HTTP_METHOD = {
   DELETE: "delete"
 }
 
-function callApi(endpoint, httpMethod, responseSchema) {
+function callApi(endpoint, httpMethod, body, responseSchema) {
   const apiHost = 'http://localhost:8080'
   const fullUrl = (endpoint.indexOf(apiHost) === -1) ? apiHost + endpoint : endpoint
 
@@ -23,6 +24,7 @@ function callApi(endpoint, httpMethod, responseSchema) {
   return fetch(fullUrl, {
     method: httpMethod,
     headers,
+    body,
   })
   .then(response => response.json()
   .then(json => ({ json, response })))
@@ -31,10 +33,14 @@ function callApi(endpoint, httpMethod, responseSchema) {
       return Promise.reject(json)
     }
 
-    const camelizedJson = camelizeKeys(json)
+    if (responseSchema){
+      const camelizedJson = camelizeKeys(json)
 
-    return Object.assign({},
-      normalize(camelizedJson, responseSchema))
+      return Object.assign({},
+        normalize(camelizedJson, responseSchema))
+    }
+
+    return Object.assign({},json)
   })
   .then(
     response => ({ response }),
@@ -47,17 +53,28 @@ const tagSchema = new schema.Entity('tags', {
 })
 const tagArraySchema = new schema.Array( new schema.Array(tagSchema))
 
+function buildRequestBody(params){
+  const json =  JSON.stringify(params)
+  console.log("BuildRequestBody: json = ",json)
+  return json
+}
 export function apiClient(action:Action) {
 
   switch (action.type) {
-    case TagRepository.TAG.FIND_ALL.TRIGGER:
+    case TagRoutines.FIND_ALL.TRIGGER:
 
-      const result = callApi('/tags', HTTP_METHOD.GET, tagArraySchema)
+      return callApi('/tags', HTTP_METHOD.GET, "", tagArraySchema)
 
+    case LogInRoutine.TRIGGER:
+      console.log("LogInRoutine.TRIGGER: action: ",action)
+      const result = callApi('/auth/login', HTTP_METHOD.POST, buildRequestBody({username:action.payload.username, password: action.payload.password}))
+      console.log("LogInRoutine.TRIGGER: result: ",result)
       return result
+
     default:
       console.log("make apiClient request: ", action)
-
   }
+
+  return ""
 }
 

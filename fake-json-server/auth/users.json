@@ -2,33 +2,51 @@
   "users": [
     {
       "id": 1,
-      "name": "joe",
+      "username": "joe",
       "email": "joe@email.com",
-      "password": "joe"
+      "password": "joe",
+      "roles": [
+        "ROLE_SUPER_ADMIN"
+      ]
     },
     {
       "id": 2,
-      "name": "leo",
+      "username": "leo",
       "email": "leo@email.com",
-      "password": "leo"
+      "password": "leo",
+      "roles": [
+        "ROLE_ADMIN"
+      ]
     },
     {
       "id": 3,
-      "name": "peppa",
+      "username": "peppa",
       "email": "peppa@email.com",
-      "password": "peppa"
+      "password": "peppa",
+      "roles": [
+        "ROLE_MANAGER",
+        "ROLE_MANAGE_TODO",
+        "ROLE_MANAGE_TAGS"
+      ]
     },
     {
       "id": 4,
-      "name": "george",
+      "username": "george",
       "email": "george@email.com",
-      "password": "george"
+      "password": "george",
+      "roles": [
+        "ROLE_EMPLOYEE",
+        "ROLE_MANAGE_REPORT"
+      ]
     },
     {
       "id": 5,
-      "name": "polly",
+      "username": "polly",
       "email": "polly@email.com",
-      "password": "polly"
+      "password": "polly",
+      "roles": [
+        "ROLE_VISITOR"
+      ]
     }
   ]
 }
