@@ -13,6 +13,7 @@ import { useAuth } from '../hooks/useReducer'
  */
 export function AuthenticatedRoute({ component: Component, ...rest }) {
   const {authenticated} = useAuth()
+  console.log("AuthenticatedRoute: authenticated,component:", authenticated, Component)
   return (
     <Route
       {...rest}

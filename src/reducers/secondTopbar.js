@@ -12,8 +12,8 @@ import {
 } from '../types/secondTopbar'
 
 const initState: SecondTopbarState = {
-  header:"DefaultHeader",
-  icon:"DefaultIcon",
+  header:"",
+  icon:"",
   menuItems: [],
 }
 

@@ -7,7 +7,6 @@ import { AppMainTopbar } from './AppMainTopbar'
 import { AppSecondTopbar } from './AppSecondTopbar'
 
 const styles = theme => {
-  console.log("THEME: ", theme)
   return {
     appBar: {
       backgroundColor: theme.app.color.topBar.backgroundColor,

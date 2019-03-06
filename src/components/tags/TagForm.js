@@ -138,7 +138,7 @@ export function TagForm({ handleSubmit }) {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
-        onReset={console.log("Formik reset")}
+        onReset={console.log("TagForm Reset")}
         handleBlur={handleBlur}
       />
     </React.Fragment>

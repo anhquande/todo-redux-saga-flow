@@ -52,8 +52,6 @@ export function AppSecondTopbar() {
 
   }
 
-  console.log('AppSecondTopbar : ', header, icon, menuItems)
-
   function renderActions() {
 
     return (

@@ -25,7 +25,6 @@
       "password": "peppa",
       "roles": [
         "ROLE_MANAGER",
-        "ROLE_MANAGE_TODO",
         "ROLE_MANAGE_TAGS"
       ]
     },

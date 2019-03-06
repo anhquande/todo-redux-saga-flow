@@ -150,7 +150,7 @@ export function TodoForm({ handleSubmit }: {handleSubmit:(title:string,note:stri
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
-        onReset={console.log("Formik reset")}
+        onReset={console.log("Todo Formik reset")}
         handleBlur={handleBlur}
       />
     </React.Fragment>
