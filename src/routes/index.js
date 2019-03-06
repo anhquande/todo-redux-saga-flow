@@ -11,6 +11,7 @@ import { AuthenticatedRoute } from './AuthenticatedRoute'
 import { NonAuthenticatedRoute } from './NonAuthenticatedRoute'
 import { Admin } from '../containers/app/Admin'
 import { SecureRoute } from './SecureRoute'
+import { Logout } from '../containers/login/Logout'
 
 export const secureRoutes = (
   <Switch>
@@ -27,6 +28,7 @@ export const publicRoutes = (
   <Switch>
     <AuthenticatedRoute exact path="/admin" component={Admin}/>
     <AuthenticatedRoute exact path="/admin/" component={Admin}/>
+    <AuthenticatedRoute exact path="/logout" component={Logout}/>
     <NonAuthenticatedRoute exact path="/login" component={LoginPage}/>
     <NonAuthenticatedRoute component={LoginPage}/>
   </Switch>

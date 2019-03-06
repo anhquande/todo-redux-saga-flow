@@ -3,7 +3,7 @@ import { normalize, schema } from 'normalizr'
 import { camelizeKeys } from 'humps'
 import { TagRoutines } from './tag/repository'
 import type { Action } from '../types'
-import { LogInRoutine } from './auth/routines'
+import { LogInRoutine, LogOutRoutine } from './auth/routines'
 
 export const HTTP_METHOD = {
   POST: "post",
@@ -66,10 +66,11 @@ export function apiClient(action:Action) {
       return callApi('/tags', HTTP_METHOD.GET, "", tagArraySchema)
 
     case LogInRoutine.TRIGGER:
-      console.log("LogInRoutine.TRIGGER: action: ",action)
-      const result = callApi('/auth/login', HTTP_METHOD.POST, buildRequestBody({username:action.payload.username, password: action.payload.password}))
-      console.log("LogInRoutine.TRIGGER: result: ",result)
-      return result
+      return callApi('/auth/login', HTTP_METHOD.POST, buildRequestBody({username:action.payload.username, password: action.payload.password}))
+
+    case LogOutRoutine.TRIGGER:
+      // TODO: clear the token
+      return ""
 
     default:
       console.log("make apiClient request: ", action)

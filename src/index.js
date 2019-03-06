@@ -6,6 +6,7 @@ import blue from '@material-ui/core/colors/blue'
 import { ThemeProvider } from '@material-ui/styles'
 import { ConnectedRouter } from 'connected-react-router'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 import configureStore, { history } from './store'
 import * as serviceWorker from './serviceWorker'
 import createAppTheme from './themes/createAppTheme'
@@ -13,7 +14,6 @@ import './i18n'
 import { App } from './containers/app/index'
 import rootSaga from './sagas'
 import 'typeface-roboto'
-import { PersistGate } from 'redux-persist/integration/react'
 
 const themeOptions = {
   palette: {

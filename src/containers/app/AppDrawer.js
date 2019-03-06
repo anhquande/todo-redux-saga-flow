@@ -2,6 +2,9 @@ import React from 'react'
 import Drawer from '@material-ui/core/Drawer'
 import classNames from 'classnames'
 import Grid from '@material-ui/core/Grid'
+import { Link as RouterLink } from 'react-router-dom'
+import Link from '@material-ui/core/Link'
+
 import Avatar from '@material-ui/core/Avatar' // Import using relative path
 import { SidebarMenu } from './SidebarMenu'
 import { useSidebarMenuState } from '../../hooks/useReducer'
@@ -121,6 +124,8 @@ export function AppDrawer() {
   const classes = useClasses(styles)
 
   const { sidebarMenuOpen } = useSidebarMenuState()
+  const LogOutLink = props => <RouterLink to="/logout" {...props}/>
+  const MyAccountLink = props => <RouterLink to="/myaccount" {...props}/>
 
   return (
     <Drawer
@@ -181,11 +186,9 @@ export function AppDrawer() {
               </a>
             </Grid>
             <Grid item>
-              <a href="/logout" title="Logout"
-                 className={classNames(classes.link)}
-              >
+              <Link component={LogOutLink} className={classNames(classes.link)}>
                 <Icon name="logout" fontSize="small" className={classes.logoutIcon}/> Logout
-              </a>
+              </Link>
             </Grid>
           </Grid>
         </Grid>
