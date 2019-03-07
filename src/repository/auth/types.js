@@ -8,6 +8,7 @@ export const ROLE_MANAGE_TAG = "ROLE_MANAGE_TAG"
 export const ROLE_MANAGE_TODO = "ROLE_MANAGE_TODO"
 
 export type GrantedAuthority =
+  | "*"
   | "ROLE_GUESS"
   | "ROLE_USER"
   | "ROLE_ADMIN"
@@ -18,15 +19,15 @@ export type GrantedAuthority =
 export type GrantedAuthorities = Array<GrantedAuthority>
 
 export type AuthUser = {
-  username:string,
-  email:string,
-  id:string,
-  roles:GrantedAuthorities
+  username: string,
+  email: string,
+  id: string,
+  roles: GrantedAuthorities
 }
 
 export type AuthState = {
   +authenticated: boolean,
-  +user:AuthUser,
+  +user: AuthUser,
   +grantedAuthorities: GrantedAuthorities,
   +sessionId: string,
   +token: string,
@@ -34,7 +35,7 @@ export type AuthState = {
   error: string,
 }
 
-export const Anonymous:AuthUser = {username:"",id:"",email:"",roles:[]}
+export const Anonymous: AuthUser = { username: "", id: "", email: "", roles: [] }
 
 
 

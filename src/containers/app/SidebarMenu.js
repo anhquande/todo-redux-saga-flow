@@ -1,10 +1,10 @@
 import React from 'react'
 import List from '@material-ui/core/List'
 import classNames from 'classnames'
-import { useSidebarMenuState } from '../../hooks/useReducer'
+import { useAuth, useSidebarMenuState } from '../../hooks/useReducer'
 import { ListItemLink } from '../../components/ListItemLink'
 import { useClasses } from '../../hooks/useClasses'
-
+import { hasAccess } from '../../utils/securityUtils'
 
 const styles = theme => {
   return {
@@ -28,12 +28,14 @@ const styles = theme => {
     }
   }
 }
-
 export function SidebarMenu() {
 
   const { sidebarMenu, sidebarMenuOpen } = useSidebarMenuState()
 
+  console.log("sidebarMenu: ",sidebarMenu)
   const classes = useClasses(styles)
+
+  const auth = useAuth()
 
   function renderSection(section) {
     return (
@@ -46,7 +48,7 @@ export function SidebarMenu() {
 
         <List>
           {section.menuItems
-          .filter(item => item.visible)
+          .filter(item => item.visible && hasAccess(auth, item.hasAnyRole))
           .map(item => (
             <ListItemLink key={item.id}
                           to={item.to}
@@ -63,7 +65,9 @@ export function SidebarMenu() {
   return (
     <div>
       {sidebarMenu
-      .filter(section => section.visible)
+      .filter(section => {
+        return section.visible && hasAccess(auth, section.hasAnyRole)
+      })
       .map(section => renderSection(section))
       }
     </div>

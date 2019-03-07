@@ -4,7 +4,6 @@ import ListItem from '@material-ui/core/ListItem'
 import Link from '@material-ui/core/Link'
 import { Icon } from './Icon'
 import { useClasses } from '../hooks/useClasses'
-import { LanguageSwitcher } from '../containers/LanguageSwitcher'
 
 const styles = theme => ({
   linkText: {
@@ -79,10 +78,6 @@ export function ListItemLink({ icon, primary, secondary, to, component:Component
           {icon && (
             <Icon name={icon}/>
           )}
-          {/* <ListItemText inset primary={primary} secondary={secondary} className={classes.sidebarMenuItem.primary} */}
-          {/* classes={{ textPrimary: classes.sidebarMenuItem.primary }} */}
-          {/* primaryTypographyProps={{color:'textPrimary'}} */}
-          {/* /> */}
           <span className={classes.linkText}>{primary}</span>
         </ListItem>
       )}

@@ -1,5 +1,7 @@
 // @flow
 
+import type { GrantedAuthorities } from '../repository/auth/types'
+
 export type MenuItemTarget = string
 
 export type Event = string
@@ -18,7 +20,8 @@ export type MenuItemModel = {
   visible: boolean,
   visibleOnDesktop: boolean,
   visibleOnMobile: boolean,
-  event: Event
+  event: Event,
+  hasAnyRole: GrantedAuthorities
 }
 
 export type MenuModel = Array<MenuItemModel>
@@ -29,11 +32,12 @@ export type MenuSectionModel = {
   header: string,
   headerVisible: boolean,
   menuItems: MenuModel,
+  hasAnyRole: GrantedAuthorities
 }
 
 export type MenuSectionList = Array<MenuSectionModel>
 
-export function createMenuSection(id: string, header: string, menuItems: MenuModel): MenuSectionModel {
+export function createMenuSection(id: string, header: string, menuItems: MenuModel, hasAnyRole:GrantedAuthorities=["*"]): MenuSectionModel {
   const headerVisible = header !== null || header !== undefined || header !== ''
   return {
     id,
@@ -41,12 +45,14 @@ export function createMenuSection(id: string, header: string, menuItems: MenuMod
     header,
     headerVisible,
     menuItems,
+    hasAnyRole,
   }
 }
 
 export function createComponentMenuItem(
   id: string,
   component: any,
+  hasAnyRole:GrantedAuthorities=["*"],
   { ...params }: {
     params?: {
       badgeVisible?: boolean,
@@ -68,6 +74,7 @@ export function createComponentMenuItem(
     visibleOnDesktop: true,
     visibleOnMobile: true,
     event: "",
+    hasAnyRole,
     ...params
   }
 }
@@ -77,6 +84,7 @@ export function createTextMenuItem(
   title: string,
   icon: string,
   to: MenuItemTarget,
+  hasAnyRole:GrantedAuthorities=["*"],
   { ...params }: {
     params?: {
       badgeVisible?: boolean,
@@ -98,6 +106,7 @@ export function createTextMenuItem(
     visibleOnDesktop: true,
     visibleOnMobile: true,
     event: "",
+    hasAnyRole,
     ...params
   }
 }
@@ -107,7 +116,8 @@ export function createIconOnlyMenuItem(id: string, tooltip: string, icon: string
                                            badgeVisible?: boolean,
                                            badge?: number,
                                          }
-                                       }
+                                       },
+                                       hasAnyRole:GrantedAuthorities=["*"]
 ): MenuItemModel {
   return {
     id,
@@ -124,6 +134,7 @@ export function createIconOnlyMenuItem(id: string, tooltip: string, icon: string
     visibleOnDesktop: true,
     visibleOnMobile: true,
     event: "",
+    hasAnyRole,
     ...params
   }
 }
