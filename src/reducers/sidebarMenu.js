@@ -7,7 +7,6 @@ import { LanguageSwitcher } from '../containers/LanguageSwitcher'
 const sectionMain=createMenuSection("SEC_MAIN", "Main", [
   createTextMenuItem("SM_TODOS","Todos", "todos", "/admin/todos", {}),
   createTextMenuItem("SM_TAGS","Tags", "tags", "/admin/tags", {}),
-  createTextMenuItem("SM_HELP","Help", "help", "/admin/help", {}),
 ])
 const sectionHelp=createMenuSection("SEC_HELP", "Support", [
   createTextMenuItem("SM_HELP","Help", "help", "http://help.me.please.com", {}),

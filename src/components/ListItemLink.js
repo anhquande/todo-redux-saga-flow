@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink as RouterLink } from 'react-router-dom'
 import ListItem from '@material-ui/core/ListItem'
+import Link from '@material-ui/core/Link'
 import { Icon } from './Icon'
 import { useClasses } from '../hooks/useClasses'
 import { LanguageSwitcher } from '../containers/LanguageSwitcher'
@@ -35,7 +36,8 @@ const styles = theme => ({
     '&:hover': {
       // backgroundColor: theme.app.sidebar.menuItem.hover.backgroundColor,
       color: theme.app.sidebar.menuItem.hover.color,
-      borderLeft: '3px solid #3c8dbc'
+      borderLeft: '3px solid #3c8dbc',
+      textDecoration: 'none',
     },
     '&.active': {
       // backgroundColor: theme.app.sidebar.menuItem.active.backgroundColor,
@@ -52,7 +54,18 @@ const styles = theme => ({
 })
 
 export function ListItemLink({ icon, primary, secondary, to, component:Component, linkOptions }) {
-  const renderLink = itemProps => <RouterLink to={to} {...itemProps} {...linkOptions}/>
+  const renderLink = itemProps => {
+    if (to && to.startsWith("http")){
+      return (
+        <Link href={to} {...itemProps}{...linkOptions}>
+          {itemProps.children}
+        </Link>
+      )
+    }
+    return (
+      <RouterLink to={to} {...itemProps}{...linkOptions}/>
+    )
+  }
   const classes = useClasses(styles)
   return (
     <>
