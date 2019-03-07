@@ -7,10 +7,24 @@ import { Anonymous } from './types'
 import { LogInRoutine, LogOutRoutine } from './routines'
 import { getIn } from '../../utils/objectUtils'
 
+// const initState: AuthState = {
+//   authenticated: false,
+//   grantedAuthorities: ['ROLE_ADMIN', 'ROLE_GUESS'],
+//   user:Anonymous,
+//   sessionId: "",
+//   token: "",
+//   loading: false,
+//   error: "",
+// }
 const initState: AuthState = {
-  authenticated: false,
-  grantedAuthorities: ['ROLE_ADMIN', 'ROLE_GUESS'],
-  user:Anonymous,
+  authenticated: true,
+  grantedAuthorities: ['ROLE_ADMIN', 'ROLE_GUESS', 'ROLE_MANAGE_TAG', 'ROLE_MANAGE_TODO'],
+  user:{
+    username:"faker",
+    id:"123456789",
+    email:"faker@email.com",
+
+  },
   sessionId: "",
   token: "",
   loading: false,

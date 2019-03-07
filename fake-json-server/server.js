@@ -14,7 +14,7 @@ server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json())
 
 server.use(jsonServer.defaults())
-server.use('/api', router)
+server.use('/auth/api', router)
 
 const SECRET_KEY = '123456789'
 
@@ -55,6 +55,8 @@ server.post('/auth/login', (req, res) => {
 })
 
 server.use(/^(?!\/auth).*$/,  (req, res, next) => {
+  next()
+  /*
   if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
     const status = 401
     const message = 'Error in authorization format'
@@ -68,7 +70,7 @@ server.use(/^(?!\/auth).*$/,  (req, res, next) => {
     const status = 401
     const message = 'Error access_token is revoked'
     res.status(status).json({status, message})
-  }
+  } */
 })
 
 const port  = 8080

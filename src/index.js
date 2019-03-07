@@ -7,7 +7,7 @@ import { ThemeProvider } from '@material-ui/styles'
 import { ConnectedRouter } from 'connected-react-router'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-import configureStore, { history } from './store'
+import { history, persistor, store } from './store'
 import * as serviceWorker from './serviceWorker'
 import createAppTheme from './themes/createAppTheme'
 import './i18n'
@@ -24,7 +24,6 @@ const themeOptions = {
 
 const theme = createAppTheme(themeOptions)
 
-const { store, persistor } = configureStore()
 store.runSaga(rootSaga)
 
 ReactDOM.render(

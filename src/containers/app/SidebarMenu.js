@@ -50,6 +50,7 @@ export function SidebarMenu() {
           .map(item => (
             <ListItemLink key={item.id}
                           to={item.to}
+                          component={item.component}
                           primary={item.title}
                           secondary={item.subTitle}
                           icon={item.icon}/>

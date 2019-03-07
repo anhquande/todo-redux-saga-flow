@@ -13,7 +13,7 @@ export const history = createBrowserHistory()
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ["auth","pageState","tagsState","sidebarMenuState","topbarMenuState","secondTopbarState","notificationDrawerState","tagsState","todos"]
+  blacklist: ["auth","localeState","pageState","tagsState","sidebarMenuState","topbarMenuState","secondTopbarState","notificationDrawerState","tagsState","todos"]
 }
 
 export default function configureStore(preloadedState:any):Store{
@@ -44,3 +44,5 @@ export default function configureStore(preloadedState:any):Store{
 
   return { store, persistor }
 }
+
+export const { store, persistor} = configureStore()

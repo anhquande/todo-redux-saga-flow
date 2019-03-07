@@ -14,6 +14,7 @@ export type MenuItemModel = {
   badge: number,
   badgeVisible: boolean,
   to: MenuItemTarget,
+  component: any,
   visible: boolean,
   visibleOnDesktop: boolean,
   visibleOnMobile: boolean,
@@ -43,6 +44,34 @@ export function createMenuSection(id: string, header: string, menuItems: MenuMod
   }
 }
 
+export function createComponentMenuItem(
+  id: string,
+  component: any,
+  { ...params }: {
+    params?: {
+      badgeVisible?: boolean,
+      badge?: number,
+    }
+  }): MenuItemModel {
+  return {
+    id,
+    title: '',
+    subTitle: '',
+    tooltip: '',
+    icon: '',
+    active: false,
+    badge: 0,
+    badgeVisible: false,
+    to:"",
+    component,
+    visible: true,
+    visibleOnDesktop: true,
+    visibleOnMobile: true,
+    event: "",
+    ...params
+  }
+}
+
 export function createTextMenuItem(
   id: string,
   title: string,
@@ -64,6 +93,7 @@ export function createTextMenuItem(
     badge: 0,
     badgeVisible: false,
     to,
+    component: null,
     visible: true,
     visibleOnDesktop: true,
     visibleOnMobile: true,
@@ -89,6 +119,7 @@ export function createIconOnlyMenuItem(id: string, tooltip: string, icon: string
     badge: 0,
     badgeVisible: false,
     to,
+    component: null,
     visible: true,
     visibleOnDesktop: true,
     visibleOnMobile: true,

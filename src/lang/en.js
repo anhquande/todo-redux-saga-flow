@@ -3,7 +3,7 @@ export const en = {
     "what.are.you.doing.today": "What are you doing today?",
     "tags": "Tags",
     "tag.name":"Tag",
-    "tag.usages":"Usages",
+    "tag.usages": "Usages",
   },
   placeHolder: {
     "search": "Search...",
@@ -11,6 +11,11 @@ export const en = {
   },
   requiredMessages: {
     "tag.name": "Please enter the tag name!"
-  }
-
+  },
+  languages: {
+    "en": "English",
+    "de": "German",
+    "fr": "French",
+    "ro": "Romanian"
+  },
 }

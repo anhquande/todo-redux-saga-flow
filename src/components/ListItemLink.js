@@ -3,6 +3,7 @@ import { NavLink as RouterLink } from 'react-router-dom'
 import ListItem from '@material-ui/core/ListItem'
 import { Icon } from './Icon'
 import { useClasses } from '../hooks/useClasses'
+import { LanguageSwitcher } from '../containers/LanguageSwitcher'
 
 const styles = theme => ({
   linkText: {
@@ -50,22 +51,29 @@ const styles = theme => ({
   }
 })
 
-export function ListItemLink({ icon, primary, secondary, to, linkOptions }) {
+export function ListItemLink({ icon, primary, secondary, to, component:Component, linkOptions }) {
   const renderLink = itemProps => <RouterLink to={to} {...itemProps} {...linkOptions}/>
   const classes = useClasses(styles)
   return (
     <>
-      <ListItem button component={renderLink} className={classes.sidebarMenuItem}>
-        <span className="activeMarker"/>
-        {icon && (
-          <Icon name={icon}/>
-        )}
-        {/* <ListItemText inset primary={primary} secondary={secondary} className={classes.sidebarMenuItem.primary} */}
-        {/* classes={{ textPrimary: classes.sidebarMenuItem.primary }} */}
-        {/* primaryTypographyProps={{color:'textPrimary'}} */}
-        {/* /> */}
-        <span className={classes.linkText}>{primary}</span>
-      </ListItem>
+      {Component ? (
+        <ListItem button component="li" className={classes.sidebarMenuItem}>
+          <Component/>
+        </ListItem>
+      ) : (
+        <ListItem button component={renderLink} className={classes.sidebarMenuItem}>
+          <span className="activeMarker"/>
+          {icon && (
+            <Icon name={icon}/>
+          )}
+          {/* <ListItemText inset primary={primary} secondary={secondary} className={classes.sidebarMenuItem.primary} */}
+          {/* classes={{ textPrimary: classes.sidebarMenuItem.primary }} */}
+          {/* primaryTypographyProps={{color:'textPrimary'}} */}
+          {/* /> */}
+          <span className={classes.linkText}>{primary}</span>
+        </ListItem>
+      )}
+
     </>
   )
 }

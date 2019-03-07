@@ -1,21 +1,16 @@
 // @flow
 
-import type { LocaleState, LocaleAction } from '../types/locale'
+import { createReducer } from 'redux-starter-kit'
+import type { LocaleState } from '../types/locale'
+import { changeLocale } from '../types/locale'
 
 const initState: LocaleState = {
-  locale: "en"
+  locale: "en",
+  visibleLocales: ['de','en','fr','ro']
 }
 
-const localeReducer = (state: LocaleState = initState, action: LocaleAction): LocaleState => {
-  switch (action.type) {
-    case 'CHANGE_LOCALE':
-      return {
-        ...state,
-        locale: action.locale,
-      }
-    default:
-      return state
-  }
-}
+const localeReducer = createReducer(initState, {
+  [changeLocale]:(draft, action) => {draft.locale = action.payload.locale},
+})
 
 export default localeReducer

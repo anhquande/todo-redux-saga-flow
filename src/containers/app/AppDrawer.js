@@ -9,9 +9,9 @@ import Avatar from '@material-ui/core/Avatar' // Import using relative path
 import { SidebarMenu } from './SidebarMenu'
 import { useAuth, useSidebarMenuState } from '../../hooks/useReducer'
 import { useClasses } from '../../hooks/useClasses'
-import Logo from '../../static/images/logo.png' // Import using relative path
-import LogoSmall from '../../static/images/logo-small.png'
-import MyAvatar from '../../static/images/avatar.png'
+import Logo from '../../resources/images/logo.png' // Import using relative path
+import LogoSmall from '../../resources/images/logo-small.png'
+import MyAvatar from '../../resources/images/avatar.png'
 import { Icon } from '../../components/Icon'
 
 const styles = theme => {
@@ -19,7 +19,7 @@ const styles = theme => {
     avatarRoot: {
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(1),
-      paddingBottom:theme.spacing(3),
+      paddingBottom: theme.spacing(3),
     },
     avatarRootOpen: {
       paddingLeft: theme.spacing(2),
@@ -45,8 +45,8 @@ const styles = theme => {
       textDecoration: 'none',
     },
     logoRoot: {
-      paddingTop: theme.spacing(2),
-      paddingBottom: theme.spacing(2),
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
     },
     logoRootOpen: {
       paddingLeft: theme.spacing(2),
@@ -122,11 +122,10 @@ const styles = theme => {
 export function AppDrawer() {
 
   const classes = useClasses(styles)
-  const {user} = useAuth()
+  const { user } = useAuth()
   const { sidebarMenuOpen } = useSidebarMenuState()
   const LogOutLink = props => <RouterLink to="/logout" {...props}/>
   const MyAccountLink = props => <RouterLink to="/myaccount" {...props}/>
-
 
   return (
     <Drawer
@@ -156,47 +155,49 @@ export function AppDrawer() {
         </a>
       </div>
 
-      <Grid container justify="flex-start" alignItems="center">
-        <Grid item className={classNames(classes.avatarRoot, {
-          [classes.avatarRootOpen]: sidebarMenuOpen,
-          [classes.avatarRootClose]: !sidebarMenuOpen,
-        })}
-        >
-          <a href="/myaccount" title="Logout"
-             className={classNames(classes.link)}>
-            <Avatar alt="Remy Sharp" src={MyAvatar}
-                    className={classNames(classes.avatar, {
-                      [classes.avatarOpen]: sidebarMenuOpen,
-                      [classes.avatarClose]: !sidebarMenuOpen,
-                    })}
-            />
-          </a>
-        </Grid>
-        <Grid item xs={10} sm container justify="flex-start"
-              className={classNames(classes.profileLink, {
-                [classes.profileLinkOpen]: sidebarMenuOpen,
-                [classes.profileLinkClose]: !sidebarMenuOpen,
-              })}
-        >
-          <Grid item xs container direction="column" justify="flex-start">
-            <Grid item xs>
-              <a href="/myaccount" title="Logout"
-                 className={classNames(classes.link)}
-              >
-                {user.username}
-              </a>
-            </Grid>
-            <Grid item>
-              <Link component={LogOutLink} className={classNames(classes.link)}>
-                <Icon name="logout" fontSize="small" className={classes.logoutIcon}/> Logout
-              </Link>
+      <div>
+        <Grid container justify="flex-start" alignItems="flex-start">
+          <Grid item className={classNames(classes.avatarRoot, {
+            [classes.avatarRootOpen]: sidebarMenuOpen,
+            [classes.avatarRootClose]: !sidebarMenuOpen,
+          })}
+          >
+            <a href="/myaccount" title="Logout"
+               className={classNames(classes.link)}>
+              <Avatar alt="Remy Sharp" src={MyAvatar}
+                      className={classNames(classes.avatar, {
+                        [classes.avatarOpen]: sidebarMenuOpen,
+                        [classes.avatarClose]: !sidebarMenuOpen,
+                      })}
+              />
+            </a>
+          </Grid>
+          <Grid item xs={10} sm container justify="flex-start"
+                className={classNames(classes.profileLink, {
+                  [classes.profileLinkOpen]: sidebarMenuOpen,
+                  [classes.profileLinkClose]: !sidebarMenuOpen,
+                })}
+          >
+            <Grid item xs container direction="column" justify="flex-start">
+              <Grid item xs>
+                <a href="/myaccount" title="Logout"
+                   className={classNames(classes.link)}
+                >
+                  {user.username}
+                </a>
+              </Grid>
+              <Grid item>
+                <Link component={LogOutLink} className={classNames(classes.link)}>
+                  <Icon name="logout" fontSize="small" className={classes.logoutIcon}/> Logout
+                </Link>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-
-      </Grid>
+      </div>
 
       <SidebarMenu/>
+
     </Drawer>
   ) // renderDrawer
 }

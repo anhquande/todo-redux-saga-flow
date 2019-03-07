@@ -50,6 +50,22 @@ export default function createAppTheme(options: ThemeOptions) {
           color:textColor,
           backgroundColor: '#eeeeee'
         },
+        sidebar: {
+          menuItem: {
+            color: menuColor,
+            backgroundColor: '#222d32',
+
+            hover: {
+              color: menuColorHover,
+              backgroundColor: menuBgHover,
+            },
+
+            active: {
+              color: menuColorHover,
+              backgroundColor: menuBgHover,
+            }
+          }
+        },
         menu: {
           section: {
             header: {

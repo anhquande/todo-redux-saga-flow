@@ -1,7 +1,8 @@
 // @flow
-
+import * as React from 'react'
 import type { SidebarMenuAction, SidebarMenuState } from '../types/sidebarMenu'
-import { createMenuSection, createTextMenuItem } from '../types/menu'
+import { createComponentMenuItem, createMenuSection, createTextMenuItem } from '../types/menu'
+import { LanguageSwitcher } from '../containers/LanguageSwitcher'
 
 const sectionMain=createMenuSection("SEC_MAIN", "Main", [
   createTextMenuItem("SM_TODOS","Todos", "todos", "/admin/todos", {}),
@@ -14,9 +15,13 @@ const sectionHelp=createMenuSection("SEC_HELP", "Support", [
   createTextMenuItem("SM_IMPRINT","Imprint", "imprint", "/admin/imprint", {}),
 ])
 
+const sectionLanguage=createMenuSection("SEC_LANGUAGE", "Language", [
+  createComponentMenuItem("SM_LANG_SWITCHER",LanguageSwitcher),
+])
+
 const initState: SidebarMenuState = {
   sidebarMenuOpen: true,
-  sidebarMenu: [sectionMain, sectionHelp],
+  sidebarMenu: [sectionMain, sectionHelp, sectionLanguage],
 }
 
 const sidebarMenuReducer = (state: SidebarMenuState = initState, action: SidebarMenuAction): SidebarMenuState => {
